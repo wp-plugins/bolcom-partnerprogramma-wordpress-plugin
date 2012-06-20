@@ -6,7 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Buzz' => array($baseDir . '/lib/', $vendorDir . '/kriswallsmith/buzz/lib/'),
+    'Buzz' => array($baseDir . '/lib/', $baseDir . '/vendor/kriswallsmith/buzz/lib/'),
     'BolPartnerPlugin' => $baseDir . '/src/',
-    'BolOpenApi' => $vendorDir . '/netvlies/bol-openapi-php-sdk/src/',
+    'BolOpenApi' => $baseDir . '/vendor/netvlies/bol-openapi-php-sdk/src/',
 );
