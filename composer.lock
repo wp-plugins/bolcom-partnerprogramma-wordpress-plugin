@@ -1,0 +1,22 @@
+{
+    "hash": "ecba00d4346becaf0bf501d1e8b33736",
+    "packages": [
+        {
+            "package": "kriswallsmith/buzz",
+            "version": "v0.5"
+        },
+        {
+            "package": "netvlies/bol-openapi-php-sdk",
+            "version": "dev-master",
+            "source-reference": "a272ad2266f502130e3a3b356344ac9b7cb83612"
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "netvlies/bol-openapi-php-sdk": 20
+    }
+}
