@@ -3,7 +3,7 @@ Contributors: Netvlies Internetdiensten
 Tags: bol.com, affiliate, partner program, Netherlands stores
 Requires at least: 3.1.1
 Tested up to: 3.3.1
-Stable tag: 1.0.0.0
+Stable tag: 1.0.1
 Licence: MIT
 
 Bol.com Affiliate Partner program to sell goods on your own website.
@@ -21,6 +21,9 @@ Bol.com crowded stores has the largest collection of shops in the Netherlands. I
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.0 =
 * This is first version
 
+= 1.0.1 =
+* Ensured the loading of jQuery
+* Disabled the redirects option in the Buzz curl client
