@@ -82,7 +82,8 @@ class Plugin
         add_action('admin_menu', array($this, 'initAdminMenu'));
         add_action('admin_init', array($this, 'initAdminPlugins'));
 
-        wp_enqueue_style("bol.css", BOL_PARTNER_PLUGIN_PATH . '/resources/css/bol.css');
+        wp_enqueue_script('jquery', BOL_PARTNER_PLUGIN_PATH . '/resources/js/jquery-1.4.2.min.js', '1.4.2' );
+        wp_enqueue_style('bol.css', BOL_PARTNER_PLUGIN_PATH . '/resources/css/bol.css');
 
         if (!get_option('bol_partner_settings') || ! get_option('bol_openapi_settings')) {
             // attach the config message to the wordpress action
@@ -94,10 +95,8 @@ class Plugin
     {
         add_action('wp_head', array($this, 'jsAddResourceRoot'));
 
-        wp_enqueue_script('jquery');//, BOL_PARTNER_PLUGIN_PATH . '/resources/js/jquery-1.4.2.min.js', '1.4.2' );
-        wp_enqueue_script(
-            'bol-frontend-script', BOL_PARTNER_PLUGIN_PATH . '/resources/js/tinymce/bol/js/bol.frontend.js'
-        );
+        wp_enqueue_script('jquery', BOL_PARTNER_PLUGIN_PATH . '/resources/js/jquery-1.4.2.min.js', '1.4.2' );
+        wp_enqueue_script('bol-frontend-script', BOL_PARTNER_PLUGIN_PATH . '/resources/js/bol-partner-frontend.js');
         wp_enqueue_style("bol.css", BOL_PARTNER_PLUGIN_PATH . '/resources/css/bol.css');
     }
 

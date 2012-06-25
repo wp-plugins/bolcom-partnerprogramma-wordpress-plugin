@@ -97,9 +97,7 @@ class Bestsellers extends Widget
 
         $jsonStrings = json_encode($this->placeHolders);
 
-        $src = BOL_PARTNER_PLUGIN_PATH . '/resources/js/bol-partner-frontend.js';
-        $html = '<script type="text/javascript" src="' . $src . '"></script>';
-        $html .= '<script type="text/javascript">' .
+        $html = '<script type="text/javascript">' .
             'BolPartner_Bestsellers = %s;' .
             'BolPartner.Bestsellers.fillPlaceHolders(BolPartner_Bestsellers);' .
             '</script>' . PHP_EOL;
