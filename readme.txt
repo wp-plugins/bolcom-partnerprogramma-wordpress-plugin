@@ -21,7 +21,7 @@ Bol.com crowded stores has the largest collection of shops in the Netherlands. I
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.0 =
 * This is first version
 
 = 1.0.1 =
