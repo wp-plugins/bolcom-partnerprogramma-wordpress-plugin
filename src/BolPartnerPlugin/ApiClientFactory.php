@@ -27,6 +27,8 @@ class ApiClientFactory
     public static function getCreateClient($accessKey, $secretKey)
     {
         $buzzClient = new BuzzClientCurl();
+        $buzzClient->setMaxRedirects(0);
+
         $browser = new BuzzBrowser($buzzClient);
         $client = new Client($accessKey, $secretKey, $browser);
         return $client;
