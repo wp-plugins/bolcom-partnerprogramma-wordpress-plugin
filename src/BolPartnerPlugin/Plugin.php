@@ -121,7 +121,7 @@ class Plugin
                 'manage_options',
                 'bol_dot_com',
                 '',
-                '/wp-content/plugins/bol-partner-plugin/resources/icon-bol-16x16.png'
+                BOL_PARTNER_PLUGIN_PATH . '/resources/icon-bol-16x16.png'
             );
         }
 

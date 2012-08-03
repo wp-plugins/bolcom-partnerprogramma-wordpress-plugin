@@ -33,17 +33,17 @@ class Config implements AdminPage
         // Define the Partner programm settings section
         add_settings_section(
             // id                   title                        display callback              page
-            'bol_partner_settings', 'Partner programm settings', array($this, 'displayTitle'), 'bol_partner_settings'
+            'bol_partner_settings', 'Partner program settings', array($this, 'displayTitle'), 'bol_partner_settings'
         );
         // Define the OpenApi settings section
         add_settings_section(
-            'bol_openapi_settings', 'OpenAPI settings', array($this, 'displayTitle'), 'bol_partner_settings'
+            'bol_openapi_settings', 'Open API settings', array($this, 'displayTitle'), 'bol_partner_settings'
         );
 
         // Partner programm settings fields (bol_partner_plugin_page::bol_partner_settings)
         add_settings_field(
         // id                  title
-            'bol_partner_site_id', 'Partner site ID',
+            'bol_partner_site_id', 'Partner SiteId',
         // display callback
             array($this, 'inputText'),
         // page                 section
@@ -54,7 +54,7 @@ class Config implements AdminPage
 
         add_settings_field(
             // id                  title
-            'bol_partner_access_key', 'Access Key',
+            'bol_partner_access_key', 'API Access Key',
             array($this, 'inputText'),
             'bol_partner_settings', 'bol_partner_settings',
             array('name' => 'bol_partner_settings', 'attrib' => 'access_key')
@@ -62,7 +62,7 @@ class Config implements AdminPage
 
         // OpenApi settings fields (bol_partner_plugin_page::bol_openapi_settings)
         add_settings_field(
-            'bol_partner_openapi_key', 'OpenAPI key',
+            'bol_partner_openapi_key', 'API Secret Key',
             array($this, 'inputText'),
             'bol_partner_settings', 'bol_openapi_settings',
             array('name' => 'bol_openapi_settings', 'attrib' => 'access_key', 'id' => 'bol_partner_openapi_key')
