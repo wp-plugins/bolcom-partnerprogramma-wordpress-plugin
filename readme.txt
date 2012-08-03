@@ -31,5 +31,5 @@ Bol.com crowded stores has the largest collection of shops in the Netherlands. I
 = 1.0.2 =
 * Textual changes in the plugin
 * Improved the installation instructions
-* Upgraded the class autoloader which caused error messages
+* Upgraded the class autoloader which caused deprecated messages
 * Fixed the path for the icon for the wordpress menu
