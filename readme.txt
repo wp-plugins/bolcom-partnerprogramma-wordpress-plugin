@@ -7,7 +7,6 @@ Stable tag: 1.0
 Licence: MIT
 Bol.com Affiliate Partner program to sell goods on your own website.
 
-
 == Description ==
 Bol.com Affiliate Partner Program Plugin allows you to sell goods on your own website.
 Bol.com crowded stores has the largest collection of shops in the Netherlands. In these shops we offer you the same service as in physical stores, but at internet prices. Among the millions of articles always contain an article that suits you. Thanks to our partners and 2ehandsaanbieders bol.com plaza you'll find more and you can easily compare prices.
@@ -33,3 +32,8 @@ Bol.com crowded stores has the largest collection of shops in the Netherlands. I
 * Improved the installation instructions
 * Upgraded the class autoloader which caused error messages
 * Fixed the path for the icon for the wordpress menu
+
+= 1.0.3 =
+* Removed short open tags from the code
+* Added php version check
+* Removed obsolete old code which created css files on disk

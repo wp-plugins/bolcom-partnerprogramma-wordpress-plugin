@@ -4,13 +4,19 @@ Plugin Name: Bol.com partner plugin for Wordpress
 Plugin URI: http://wordpress.org/extend/plugins/bol.com-partner/
 Description: This plugin is for bol.com affiliate partners. It enables the placement of Bol.com products from the Bol.com openAPI. Content can be added through the text editor and by widgets.
 Author: Netvlies Internetdiensten
-Version: 1.0.2
+Version: 1.0.3
 Author URI: http://www.netvlies.nl
 License: MIT
 */
 require_once 'vendor/autoload.php';
 
-$test = new BolPartnerPlugin\Widgets\Bestsellers();
+if (PHP_VERSION_ID < 50300) {
+    add_action('admin_notices', function() {
+        echo '<div class="updated fade">Your PHP version is ' . PHP_VERSION . ', but to use the Bol.com partner plugin you need PHP version >= 5.3</div>';
+    });
+    return false;
+}
+
 include_once 'src/BolPartnerPlugin/Plugin.php';
 include_once 'src/BolPartnerPlugin/PluginInstaller.php';
 
