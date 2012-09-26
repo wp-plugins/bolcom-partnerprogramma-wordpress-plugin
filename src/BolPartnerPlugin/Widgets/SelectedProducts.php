@@ -121,12 +121,6 @@ class SelectedProducts extends Widget
 
         $this->addPlaceHolder($attributes);
 
-        require($_SERVER['DOCUMENT_ROOT'].'/wp-load.php');
-        $upload_dir = wp_upload_dir();
-
-        $dir = $upload_dir['baseurl'] . '/bol-css/';
-        $attributes['css_file'] = $dir . $attributes['css_file'];
-
         // @todo: format the placeholders more to accomodate look and feel before ajax call!
 
         return sprintf(
@@ -188,7 +182,7 @@ class SelectedProducts extends Widget
 
             }
         </script>
-        <?}
+        <?php }
     }
 
 }

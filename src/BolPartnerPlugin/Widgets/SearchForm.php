@@ -127,9 +127,6 @@ class SearchForm extends Widget
         require($_SERVER['DOCUMENT_ROOT'].'/wp-load.php');
         $upload_dir = wp_upload_dir();
 
-        $dir = $upload_dir['baseurl'] . '/bol-css/';
-        $attributes['css_file'] = $dir . $attributes['css_file'];
-
         // @todo: format the placeholders more to accomodate look and feel before ajax call!
 
         return sprintf(
@@ -169,7 +166,7 @@ class SearchForm extends Widget
         $id = $this->option_name . '-' . $this->number;
         $url = BOL_PARTNER_PLUGIN_PATH . '/src/ajax/popup/search-form.php?widget=' . $id;
 
-        if($fileName == 'widgets.php'){ ?>
+        if($fileName == 'widgets.php') : ?>
         <script type="text/javascript">
             function bol_openPopupSearch() {
 
@@ -191,6 +188,6 @@ class SearchForm extends Widget
 
             }
         </script>
-        <?}
+        <?php endif;
     }
 }
