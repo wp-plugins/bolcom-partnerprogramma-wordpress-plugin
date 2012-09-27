@@ -124,9 +124,6 @@ class SearchForm extends Widget
 
         $this->addPlaceHolder($attributes);
 
-        require($_SERVER['DOCUMENT_ROOT'].'/wp-load.php');
-        $upload_dir = wp_upload_dir();
-
         // @todo: format the placeholders more to accomodate look and feel before ajax call!
 
         return sprintf(

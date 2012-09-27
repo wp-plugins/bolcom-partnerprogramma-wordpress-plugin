@@ -9,14 +9,14 @@
  */
 define('WP_USE_THEMES', false);
 
-require($_SERVER['DOCUMENT_ROOT'].'/wp-load.php');
+$pluginPath = __DIR__ . '/../../../..';
+$wp_path = $pluginPath . '/../../..';
+require_once $wp_path . '/wp-load.php';
+
 if (! is_user_logged_in()) {
     die;
 }
 
-$upload_dir = wp_upload_dir();
-$upload_dir = $upload_dir['basedir'] .'/bol-css/';
-$filename = 'bol_'. uniqid() . '_' . $popupPage . '.css';
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">

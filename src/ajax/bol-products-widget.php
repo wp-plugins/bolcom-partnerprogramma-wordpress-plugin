@@ -7,7 +7,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-require_once $_SERVER['DOCUMENT_ROOT'] . '/wp-load.php';
+$pluginPath = __DIR__ . '/../..';
+$wp_path = $pluginPath . '/../../..';
+require_once $wp_path . '/wp-load.php';
 
 use BolPartnerPlugin\ApiClientFactory;
 use BolOpenApi\Client;

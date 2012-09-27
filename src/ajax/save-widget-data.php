@@ -1,5 +1,8 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'] . '/wp-load.php';
+$pluginPath = __DIR__ . '/../..';
+$wp_path = $pluginPath . '/../../..';
+require_once $wp_path . '/wp-load.php';
+
 $widgets = 'widget_bol_partner_selected_products|widget_bol_partner_bestsellers|widget_bol_partner_search_form';
 
 if (empty($_POST['widget'])) {

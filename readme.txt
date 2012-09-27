@@ -20,12 +20,13 @@ Bol.com crowded stores has the largest collection of shops in the Netherlands. I
 
 == Changelog ==
 
-= 1.0 =
-* This is first version
+= 1.0.4 =
+* Changed wp-load include reference from absolute (from document-root) to relative to support subdir wp-installs
 
-= 1.0.1 =
-* Fixed jQuery loading issues
-* Disabled redirects in the OpenAPI curl client
+= 1.0.3 =
+* Removed short open tags from the code
+* Added php version check
+* Removed obsolete old code which created css files on disk
 
 = 1.0.2 =
 * Textual changes in the plugin
@@ -33,7 +34,9 @@ Bol.com crowded stores has the largest collection of shops in the Netherlands. I
 * Upgraded the class autoloader which caused error messages
 * Fixed the path for the icon for the wordpress menu
 
-= 1.0.3 =
-* Removed short open tags from the code
-* Added php version check
-* Removed obsolete old code which created css files on disk
+= 1.0.1 =
+* Fixed jQuery loading issues
+* Disabled redirects in the OpenAPI curl client
+
+= 1.0 =
+* This is first version
