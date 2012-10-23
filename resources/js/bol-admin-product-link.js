@@ -327,8 +327,7 @@ var BolProductDialog = {
     _getProperties : function()
     {
         var properties = {
-            limit       : jQuery('#txtLimit').val(),
-            block_id    : jQuery('#filename').val().replace('.css',''),
+            block_id    : jQuery('#blockId').val(),
             products    : jQuery('#hdnBolProducts').val()
         };
 

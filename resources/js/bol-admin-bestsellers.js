@@ -232,7 +232,7 @@ var BolBestsellersDialog = {
     {
         var properties = {
             limit       : jQuery('#txtLimit').val(),
-            block_id    : jQuery('#filename').val().replace('.css',''),
+            block_id    : jQuery('#blockId').val(),
             cat_id      : BolBestsellersDialog._getSelectedCategory()
         };
 

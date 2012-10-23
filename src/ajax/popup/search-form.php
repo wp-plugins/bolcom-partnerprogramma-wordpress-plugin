@@ -30,7 +30,7 @@ $bolSearch = BOL_PARTNER_PLUGIN_PATH . '/src/ajax/bol-search.php';
 </table>
 
 <div class="mceActionPanel">
-    <input type="hidden" name="filename" id="filename" value="<?php echo $filename?>" />
+    <input type="hidden" name="blockId" id="blockId" value="bol_<?= uniqid() ?>_search-form" />
     <?php if ($_REQUEST['widget']):?>
         <input type="hidden" name="widget" id="widget" value="<?php echo strip_tags($_REQUEST['widget'])?>" />
         <input type="button" id="save-button" name="save" class="updateButton button-primary" value="Save" onclick="BolSearchDialog.insert(<?php echo !empty($_REQUEST['widget'])?>)" />
@@ -40,13 +40,6 @@ $bolSearch = BOL_PARTNER_PLUGIN_PATH . '/src/ajax/bol-search.php';
     <input type="button" id="cancel" name="cancel" value=" Annuleren" onclick="tinyMCEPopup.close();" />
     <?php endif;?>
 </div>
-
-<iframe class="hideElement" id="iframeForm" name="iframeForm" src="../savecss.php"></iframe>
-<form id="saveCss" class="hideElement" target="iframeForm" method="post" action="../savecss.php">
-    <textarea name="cssstyle1" id="cssstyle1" style="width:600px;height:70px;"></textarea>
-    <input type="hidden" name="filename" id="filename" value="<?php echo $filename?>" />
-    <input type="submit" id="save" name="save" value="save" />
-</form>
 
     </body>
 </html>

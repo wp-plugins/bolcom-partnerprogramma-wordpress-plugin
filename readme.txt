@@ -20,6 +20,9 @@ Bol.com crowded stores has the largest collection of shops in the Netherlands. I
 
 == Changelog ==
 
+= 1.0.5 =
+* Removing old code concerning css files broke the build. The block_id could not be generated anymore. Fixed with new block_id generation.
+
 = 1.0.4 =
 * Changed wp-load include reference from absolute (from document-root) to relative to support subdir wp-installs
 
