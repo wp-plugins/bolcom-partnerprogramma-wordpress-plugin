@@ -15,7 +15,7 @@ $bolSearch = BOL_PARTNER_PLUGIN_PATH . '/src/ajax/bol-search.php';
 <div id="tabs-container">
 
     <ul id="tabs">
-        <li><a href="#tab-search">1. Selecteer Product</a></li>
+        <li><a href="#tab-search"><?php _e('1. Selecteer Product') ?></a></li>
         <li><a href="#tab-widget">2. Configureer Widget</a></li>
     </ul>
 
@@ -23,10 +23,10 @@ $bolSearch = BOL_PARTNER_PLUGIN_PATH . '/src/ajax/bol-search.php';
         <table width="100%" border="0" cellpadding="3">
             <tr>
                 <td valign="top">
-                    <input type="text" id="txtBolSearch" name="txtBolSearch" value="" style="width: 160px;"/><span class="infix"> in </span><select name="ddlBolCategory" id="ddlBolCategory" style="width: 160px;" ><option value="0">- Selecteer categorie -</option></select><br/>
+                    <input type="text" id="txtBolSearch" name="txtBolSearch" value=""/><span class="infix"> in </span><select name="ddlBolCategory" id="ddlBolCategory" style="width: 160px;" ><option value="0">- Selecteer categorie -</option></select><br/>
                 </td>
 
-                <td style="vertical-align: middle; width: 50%; text-align: center; line-height: 30px">
+                <td>
                     <input type="button" class="updateButton button-primary" value="Zoeken" id="apply-search">
                     <input type="button" class="updateButton hiddenType button" value="Naar stap 2" id="next-step">
                 </td>
@@ -35,10 +35,10 @@ $bolSearch = BOL_PARTNER_PLUGIN_PATH . '/src/ajax/bol-search.php';
         <h4>Selecteer producten om in te voegen</h4>
         <table width="100%" border="0" cellpadding="3">
             <tr>
-                <td style="vertical-align: top; width: 50%">
+                <td>
                     <div id="dvResults" class="searchResults"></div>
                 </td>
-                <td style="vertical-align: top">
+                <td>
                     <div class="selectedProducts" id="dvSelectedProducts">
                         <input type="hidden" name="hdnBolProducts" id="hdnBolProducts" value=""/>
                         <div class="productlist bol_pml_box">
@@ -52,16 +52,16 @@ $bolSearch = BOL_PARTNER_PLUGIN_PATH . '/src/ajax/bol-search.php';
 
     <div id="tab-widget">
         <table width="100%" border="0" cellpadding="3">
-            <tr><td style="vertical-align: top; width: 50%">
+            <tr><td>
             <?php $properties = array('width', 'cols'); include 'includes/properties.inc.php' ?>
             </td>
-            <td style="width: 50%; vertical-align: top" rowspan="2"><?php include 'includes/preview.inc.php' ?></td>
+            <td rowspan="2"><?php include 'includes/preview.inc.php' ?></td>
             </td></tr>
         </table>
         <p>
         <div class="mceActionPanel">
-            <input type="hidden" name="filename" id="filename-field" value="<?php echo $filename?>" />
-            <?php if ($_REQUEST['widget']):?>
+        <input type="hidden" name="blockId" id="blockId" value="bol_<?= uniqid() ?>_selected-products" />
+        <?php if ($_REQUEST['widget']):?>
             <input type="hidden" name="widget" id="widget" value="<?php echo strip_tags($_REQUEST['widget'])?>" />
             <input type="button" id="save-button" name="save" class="updateButton button-primary" value="Save" onclick="BolProductDialog.insert(<?php echo !empty($_REQUEST['widget'])?>)" />
             <span id="save-result"></span>
@@ -76,13 +76,6 @@ $bolSearch = BOL_PARTNER_PLUGIN_PATH . '/src/ajax/bol-search.php';
     </div>
 
 </div>
-
-<iframe class="hideElement" id="iframeForm" name="iframeForm" src="../savecss.php"></iframe>
-<form id="saveCss" class="hideElement" target="iframeForm" method="post" action="../savecss.php">
-    <textarea name="cssstyle1" id="cssstyle1" style="width:600px;height:70px;"></textarea>
-    <input type="hidden" name="filename" id="filename" value="<?php echo $filename ?>" />
-    <input type="submit" id="save" name="save" value="save" />
-</form>
 
     </body>
 </html>
