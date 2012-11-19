@@ -139,6 +139,9 @@ ul.productlist {
 .bol_pml_element {
     min-height: 106px;
 }
+.bol_pml_element .title {
+    font-size: 100%;
+}
 .bol_pml_element img {
     display: block;
 }
