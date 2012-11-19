@@ -2,7 +2,7 @@
 Contributors: Netvlies Internetdiensten
 Tags: bol.com, affiliate, partner program, Netherlands stores
 Requires at least: 3.1.1
-Tested up to: 3.4.0
+Tested up to: 3.4.2
 Stable tag: 1.0
 Licence: MIT
 Bol.com Affiliate Partner program to sell goods on your own website.
@@ -19,6 +19,9 @@ Bol.com crowded stores has the largest collection of shops in the Netherlands. I
 4. Click on the 'Bol.com' menu entry and insert your Partner SiteId, API Access Key and API Secret Key
 
 == Changelog ==
+
+= 1.1.1 =
+* Small style fix, setting the titles to fontsize of 100%. It seems some templates use a general .title with large fontsizes.
 
 = 1.1.0 =
 * Added filled placeholder rendering. Placeholders now have dummy content
