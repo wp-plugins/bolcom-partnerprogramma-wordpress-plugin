@@ -20,6 +20,18 @@ Bol.com crowded stores has the largest collection of shops in the Netherlands. I
 
 == Changelog ==
 
+= 1.1.0 =
+* Added filled placeholder rendering. Placeholders now have dummy content
+* Small style changes to have default product link dimensions
+* Maded column and width input available for manual input
+* Added default for widget width and widget columns (for searchForm)
+* Added preview triggers on several fields for bestsellers and search-form
+* Updated the admin css, better displaying of plugin
+* Added auto search on enter keypress in the searchbox for the products widget
+* Altered the price collection to bol api v3
+* Added auto preview to tab switch in product widget
+* Fixed path issue for loading the tinymce popup js. Did not work in a subdir install
+
 = 1.0.5 =
 * Removing old code concerning css files broke the build. The block_id could not be generated anymore. Fixed with new block_id generation.
 
