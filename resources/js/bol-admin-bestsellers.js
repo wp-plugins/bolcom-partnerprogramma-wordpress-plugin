@@ -45,21 +45,30 @@ var BolBestsellersDialog = {
         jQuery('#widthSlider').slider({
             min: 180,
             max: 800,
+            value: jQuery('#txtWidth').val(),
             slide: function(event, ui) {
-                jQuery('#widthDisplay').html(ui.value);
                 jQuery('#txtWidth').val(ui.value);
                 BolBestsellersDialog.calculateRowsCols();
             },
             stop: BolBestsellersDialog.getProductPreview
         });
+        jQuery('#txtWidth').blur(function (event) {
+            jQuery('#widthSlider').slider("value", jQuery('#txtWidth').val());
+            BolBestsellersDialog.calculateRowsCols();
+        });
+
         jQuery('#colsSlider').slider({
             min: 1,
             max: 2,
+            value: jQuery('#txtCols').val(),
             slide: function(event, ui) {
-                jQuery('#colsDisplay').html(ui.value);
                 jQuery('#txtCols').val(ui.value);
             },
             stop: BolBestsellersDialog.getProductPreview
+        });
+        jQuery('#txtCols').blur(function (event) {
+            jQuery('#colsSlider').slider("value", jQuery('#txtCols').val());
+            BolBestsellersDialog.calculateRowsCols();
         });
 
         BolBestsellersDialog.calculateRowsCols();
@@ -87,6 +96,7 @@ var BolBestsellersDialog = {
             }
         });
 
+        jQuery('.triggerPreview').change(BolBestsellersDialog.getProductPreview);
     },
 
     initStyleUpdater : function() {

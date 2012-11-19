@@ -13,6 +13,8 @@
  */
 namespace BolPartnerPlugin\Widgets;
 
+use BolPartnerPlugin\Widgets\Renderer\ProductLinksRenderer;
+
 class Bestsellers extends Widget
 {
     /**
@@ -120,11 +122,12 @@ class Bestsellers extends Widget
 
         $this->addPlaceHolder($attributes);
 
-        // @todo: format the placeholders more to accomodate look and feel before ajax call!
+        $productCount = isset($attributes['limit']) ? $attributes['limit'] : 5;
+        $renderer = new ProductLinksRenderer($this->getEmptyProducts($productCount), $attributes);
 
         return sprintf(
-            '<div class="BolPartner_Bestsellers_PlaceHolder" id="%s"></div>',
-            $attributes['block_id']
+            '<div class="BolPartner_Bestsellers_PlaceHolder" id="%s">%s</div>',
+            $attributes['block_id'], $renderer
         );
     }
 

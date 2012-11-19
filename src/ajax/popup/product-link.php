@@ -23,7 +23,7 @@ $bolSearch = BOL_PARTNER_PLUGIN_PATH . '/src/ajax/bol-search.php';
         <table width="100%" border="0" cellpadding="3">
             <tr>
                 <td valign="top">
-                    <input type="text" id="txtBolSearch" name="txtBolSearch" value=""/><span class="infix"> in </span><select name="ddlBolCategory" id="ddlBolCategory" style="width: 160px;" ><option value="0">- Selecteer categorie -</option></select><br/>
+                    <input type="text" id="txtBolSearch" name="txtBolSearch" value=""/><span class="infix"> in </span><select class="triggerPreview" name="ddlBolCategory" id="ddlBolCategory" style="width: 160px;" ><option value="0">- Selecteer categorie -</option></select><br/>
                 </td>
 
                 <td>

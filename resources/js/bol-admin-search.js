@@ -44,21 +44,30 @@ var BolSearchDialog = {
         jQuery('#widthSlider').slider({
             min: 180,
             max: 800,
+            value: jQuery('#txtWidth').val(),
             slide: function(event, ui) {
-                jQuery('#widthDisplay').html(ui.value);
                 jQuery('#txtWidth').val(ui.value);
                 BolSearchDialog.calculateRowsCols();
             },
             stop: BolSearchDialog.getProductPreview
         });
+        jQuery('#txtWidth').blur(function (event) {
+            jQuery('#widthSlider').slider("value", jQuery('#txtWidth').val());
+            BolSearchDialog.calculateRowsCols();
+        });
+
         jQuery('#colsSlider').slider({
             min: 1,
             max: 2,
+            value: jQuery('#txtCols').val(),
             slide: function(event, ui) {
-                jQuery('#colsDisplay').html(ui.value);
                 jQuery('#txtCols').val(ui.value);
             },
             stop: BolSearchDialog.getProductPreview
+        });
+        jQuery('#txtCols').blur(function (event) {
+            jQuery('#colsSlider').slider("value", jQuery('#txtCols').val());
+            BolSearchDialog.calculateRowsCols();
         });
 
         BolSearchDialog.calculateRowsCols();
@@ -76,6 +85,7 @@ var BolSearchDialog = {
             }
         });
 
+        jQuery('.triggerPreview').change(BolSearchDialog.getProductPreview);
     },
 
     initStyleUpdater : function() {

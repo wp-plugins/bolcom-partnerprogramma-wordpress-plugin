@@ -206,25 +206,23 @@ class ProductRenderer
             return '';
         }
 
-        $offers = $this->product->getOffers()->getOffers();
+        $offers = $this->product->getOffers();
+        $offers = $offers ? $offers->getOffers() : array();
 
         if (!count($offers)) {
             return '';
         }
 
+        $bolOffers = $this->getBolOffers($offers);
+        $secondHand = $this->getSecondHandOffers($offers);
+
+        // currently we do not show resellers
+//        $resellerOffers = $this->getResellerOffers($offers);
+
         uasort($offers, array($this, 'sortOffers'));
 
-        $hasSecondHand = false;
-        $normal = null;
-        foreach ($offers as $offer) {
-            if (($hasSecondHand == false) && $offer->getSecondHand()) {
-                $hasSecondHand = $offer;
-                continue;
-            }
-            if (! $offer->getSecondHand() && $offer->getPrice() > 0) {
-                $normal = $offer;
-            }
-        }
+        $hasSecondHand = count($secondHand) ? reset($secondHand) : false;
+        $normal = count($bolOffers) ? reset($bolOffers) : null;
 
         $offer = (is_null($normal) || ($normal->getAvailabilityDescription() == 'Niet leverbaar.')) && ($hasSecondHand !== false)
             ? $hasSecondHand : $normal;
@@ -233,7 +231,7 @@ class ProductRenderer
             return '';
         }
 
-        $price = $offer->getListPrice() == '' ? $offer->getPrice() : $offer->getListPrice();
+        $price = $offer->getPrice() == '' ? $offer->getListPrice() : $offer->getPrice();
         /* @var $offer \BolOpenApi\Model\Offer */
         $price = number_format((double) $price, 2, '.', '');
 
@@ -245,7 +243,8 @@ class ProductRenderer
 
     protected function getAvailabilityDescription()
     {
-        $offers = $this->product->getOffers()->getOffers();
+        $offers = $this->product->getOffers();
+        $offers = $offers ? $offers->getOffers() : array();
 
         if (!count($offers)) {
             return '';
@@ -269,6 +268,38 @@ class ProductRenderer
             ? '2<super>e</super> hands beschikbaar' : $normal->getAvailabilityDescription();
 
         return sprintf('<span class="bol_available">%s</span>', $availability);
+    }
+
+    protected function getBolOffers(array $offers)
+    {
+        $bolOffers = array();
+        foreach ($offers as $offer) {
+            if ($offer->getSeller()->getId() === '0') {
+                $bolOffers[] = $offer;
+            }
+        }
+
+        if (count($bolOffers) > 1) {
+            uasort($bolOffers, array($this, 'sortOffers'));
+        }
+
+        return $bolOffers;
+    }
+
+    protected function getSecondHandOffers(array $offers)
+    {
+        $secondHandOffers = array();
+        foreach ($offers as $offer) {
+            if ($offer->getSecondHand() === 'true') {
+                $secondHandOffers[] = $offer;
+            }
+        }
+
+        if (count($secondHandOffers) > 1) {
+            uasort($secondHandOffers, array($this, 'sortOffers'));
+        }
+
+        return $secondHandOffers;
     }
 
     protected function sortOffers($a, $b)
@@ -368,10 +399,13 @@ class ProductRenderer
     protected function getLink()
     {
         $str = 'p=1&amp;t=url&amp;s=%s&amp;url=%s&amp;f=API&amp;subid=%s&amp;name=%s';
+
+        $urls = $this->product->getUrls();
+
         $link = sprintf(
             $str,
             $this->options['partnerId'],
-            urlencode($this->product->getUrls()->getMain()),
+            $urls ? urlencode($this->product->getUrls()->getMain()) : '#',
             $this->options['sub_id'],
             urlencode($this->options['name'])
         );
@@ -385,8 +419,7 @@ class ProductRenderer
 
         $images = $this->product->getImages();
 
-        $image = $images->getMedium();
-
+        $image = $images ? $images->getMedium() : null;
         $image = $image ? $image : $this->standardImage;
 
         return sprintf($str, $image, $this->product->getTitle(), $this->options['image_width']);

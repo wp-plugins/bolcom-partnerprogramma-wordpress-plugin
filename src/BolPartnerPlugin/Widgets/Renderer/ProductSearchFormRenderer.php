@@ -15,8 +15,14 @@ use BolOpenApi\Model\Product;
 
 class ProductSearchFormRenderer extends ProductLinksRenderer
 {
-    protected $categories;
+    /**
+     * @var array
+     */
+    protected $categories = array();
 
+    /**
+     * @return array
+     */
     public function getCategories()
     {
         $options = array();
@@ -26,12 +32,20 @@ class ProductSearchFormRenderer extends ProductLinksRenderer
         return $options;
     }
 
-    public function setCategories($categories)
+    /**
+     * @param $categories
+     *
+     * @return ProductSearchFormRenderer
+     */public function setCategories($categories)
     {
         $this->categories = $categories;
         return $this;
     }
 
+    /**
+     * @param array $result
+     * @param array $options
+     */
     public function __construct($result, array $options)
     {
         if (! is_null($result)) {
@@ -44,6 +58,9 @@ class ProductSearchFormRenderer extends ProductLinksRenderer
         parent::__construct($products, $options);
     }
 
+    /**
+     * @return string
+     */
     public function render()
     {
         $html = $this->getHtmlBody();
@@ -77,7 +94,11 @@ class ProductSearchFormRenderer extends ProductLinksRenderer
         );
     }
 
-    public function renderSearchBox(array $options)
+    /**
+     * @param array $options
+     *
+     * @return string
+     */public function renderSearchBox(array $options)
     {
         $id = $this->options['block_id'] . '_button_search';
 
@@ -91,14 +112,20 @@ class ProductSearchFormRenderer extends ProductLinksRenderer
         return sprintf($html, $default, $id);
     }
 
-    public function renderPreferences(array $options)
+    /**
+     * @param array $options
+     * @return string
+     */public function renderPreferences(array $options)
     {
         $id = $this->options['block_id'] . '_preferences';
         $values = str_replace('"', "'", json_encode($options));
         return sprintf('<input type="hidden" name="preferences" id="%s" value="%s"/>', $id, $values);
     }
 
-    public function renderCategorySelect(array $options)
+    /**
+     * @param array $options
+     * @return string
+     */public function renderCategorySelect(array $options)
     {
         if (! isset($options['cat_select']) || ! $options['cat_select']) {
             return '';
@@ -114,11 +141,17 @@ class ProductSearchFormRenderer extends ProductLinksRenderer
         return sprintf($selectHtml, implode("\n    ", $options));
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->render();
     }
 
+    /**
+     * @return string
+     */
     protected function getHtmlBody()
     {
         return '%s<div class="bolLinks bol_pml_box" id="S%s" style="%s">' .

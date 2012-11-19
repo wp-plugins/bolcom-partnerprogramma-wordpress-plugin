@@ -15,18 +15,24 @@ $bolSearch = BOL_PARTNER_PLUGIN_PATH . '/src/ajax/bol-search.php';
 <table width="100%" border="0" cellpadding="3">
     <tr>
         <td width="50%" style="vertical-align: top">
-            <label for="ddlBolCategory"><span class="label">Selecteer groep:</span></label><input type="radio" name="rbShowCat" id="rbShowCat1" value="0" checked="checked"/><select name="ddlBolCategory" id="ddlBolCategory" style="width: 40%">
+            <label for="ddlBolCategory"><span class="label">Selecteer groep:</span></label><input type="radio" name="rbShowCat" id="rbShowCat1" value="0" checked="checked"/><select class="triggerPreview" name="ddlBolCategory" id="ddlBolCategory" style="width: 40%">
                 <option value="0">- Selecteer categorie -</option>
             </select><br/>
             <span class="label">&nbsp;</span><input type="radio" name="rbShowCat" id="rbShowCat2" value="1"/><label for="rbShowCat2"> Selectieveld op site weergeven</label><br/>
 
-            <label for="txtSearch"><span class="label">Default zoeken:</span></label><input type="text" name="txtSearch" id="txtSearch" class="property"><br/>
-            <label for="txtLimit"><span class="label">Limiet:</span></label><input type="text" name="txtLimit" id="txtLimit" value="10" style="width: 50px"><br/>
+            <label for="txtSearch"><span class="label">Default zoeken:</span></label><input class="triggerPreview" type="text" name="txtSearch" id="txtSearch" class="property"><br/>
+            <label for="txtLimit"><span class="label">Limiet:</span></label><input class="triggerPreview" type="text" name="txtLimit" id="txtLimit" value="10" style="width: 50px"><br/>
             <br/>
         </td>
         <td style="width: 50%; vertical-align: top" rowspan="2"><?php include 'includes/preview.inc.php' ?></td>
     </tr>
-    <tr><td><?php $properties = array('header', 'width', 'cols'); include 'includes/properties.inc.php' ?></td></tr>
+    <tr><td>
+        <?php
+            $properties = array('header', 'width', 'cols');
+            $defaults = array('txtWidth' => 500, 'txtCols' => 2);
+            include 'includes/properties.inc.php'
+        ?>
+    </td></tr>
 </table>
 
 <div class="mceActionPanel">

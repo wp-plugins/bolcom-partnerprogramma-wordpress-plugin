@@ -62,4 +62,24 @@ class Widget extends \WP_Widget {
         $tmp = $this->get_field_id($name);
         return str_replace("-", "_", $tmp);
     }
+
+    /**
+     * Creates an array with empty products for the placeholders to use
+     * in rendering a temporary layout for the widget
+     *
+     * @param $count
+     * @return array
+     */
+    protected function getEmptyProducts($count)
+    {
+        if ($count < 1) {
+            throw new \InvalidArgumentException('$count needs to be >= 1');
+        }
+
+        $products = array();
+        for ($i = 0; $i < $count; ++$i) {
+            $products[] = new \BolOpenApi\Model\Product();
+        }
+        return $products;
+    }
 }

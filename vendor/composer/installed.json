@@ -3,7 +3,6 @@
         "name": "kriswallsmith/buzz",
         "version": "v0.5",
         "version_normalized": "0.5.0.0",
-        "time": "2011-11-15 03:49:16",
         "source": {
             "type": "git",
             "url": "http://github.com/kriswallsmith/Buzz.git",
@@ -18,8 +17,14 @@
         "require": {
             "php": ">=5.3.0"
         },
+        "time": "2011-11-15 03:49:16",
         "type": "library",
         "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Buzz": "lib/"
+            }
+        },
         "license": [
             "MIT"
         ],
@@ -35,26 +40,20 @@
         "homepage": "https://github.com/kriswallsmith/Buzz",
         "keywords": [
             "http client"
-        ],
-        "autoload": {
-            "psr-0": {
-                "Buzz": "lib/"
-            }
-        }
+        ]
     },
     {
         "name": "netvlies/bol-openapi-php-sdk",
         "version": "dev-master",
         "version_normalized": "9999999-dev",
-        "time": "2012-06-06 08:15:39",
         "source": {
             "type": "git",
             "url": "git://github.com/netvlies/bol-openapi-php-sdk.git",
-            "reference": "a272ad2266f502130e3a3b356344ac9b7cb83612"
+            "reference": "v1.0.0"
         },
         "dist": {
             "type": "zip",
-            "url": "https://github.com/netvlies/bol-openapi-php-sdk/zipball/v1.0.0",
+            "url": "https://github.com/netvlies/bol-openapi-php-sdk/archive/v1.0.0.zip",
             "reference": "v1.0.0",
             "shasum": ""
         },
@@ -62,24 +61,23 @@
             "kriswallsmith/buzz": "v0.5",
             "php": ">=5.3.0"
         },
+        "time": "2012-06-06 01:15:39",
         "type": "library",
         "installation-source": "source",
+        "autoload": {
+            "psr-0": {
+                "BolOpenApi": "src/"
+            }
+        },
         "license": [
             "MIT"
         ],
         "authors": [
             {
                 "name": "Kristian Zondervan",
-                "email": "kristian.zondervan@gmail.com",
-                "homepage": null,
-                "role": null
+                "email": "kristian.zondervan@gmail.com"
             }
         ],
-        "description": "The Bol OpenApi SDK for PHP developers enables you to easily develop products over the Bol OpenApi.",
-        "autoload": {
-            "psr-0": {
-                "BolOpenApi": "src/"
-            }
-        }
+        "description": "The Bol OpenApi SDK for PHP developers enables you to easily develop products over the Bol OpenApi."
     }
 ]

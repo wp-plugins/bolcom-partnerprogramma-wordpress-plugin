@@ -12,6 +12,8 @@
  */
 namespace BolPartnerPlugin\Widgets;
 
+use BolPartnerPlugin\Widgets\Renderer\ProductSearchFormRenderer;
+
 class SearchForm extends Widget
 {
     /**
@@ -124,12 +126,29 @@ class SearchForm extends Widget
 
         $this->addPlaceHolder($attributes);
 
-        // @todo: format the placeholders more to accomodate look and feel before ajax call!
+        $productCount = isset($attributes['limit']) && $attributes['limit'] ? (int) $attributes['limit'] : 5;
+        $results = $this->getEmptySearchResults($productCount);
+        $renderer = new ProductSearchFormRenderer($results, $attributes);
 
         return sprintf(
-            '<div class="BolPartner_SelectedProducts_PlaceHolder" id="%s"></div>',
-            $attributes['block_id']
+            '<div class="BolPartner_SelectedProducts_PlaceHolder" id="%s">%s</div>',
+            $attributes['block_id'], $renderer
         );
+    }
+
+    /**
+     * Returns the SearchResultsResponse, used by the ProductSearchFormRenderer with
+     * $count number of empty products as result
+     *
+     * @param $count
+     * @return \BolOpenApi\Response\SearchResultsResponse
+     */
+    protected function getEmptySearchResults($count)
+    {
+        $results = new \BolOpenApi\Response\SearchResultsResponse();
+        $results->setProducts($this->getEmptyProducts($count));
+        $results->setCategories(array());
+        return $results;
     }
 
     /**

@@ -15,7 +15,10 @@
  * file that was distributed with this source code.
  */
 ?>
-<?php $properties = isset($properties) ? $properties : array() ?>
+<?php
+    $properties = isset($properties) ? $properties : array();
+    $defaults = isset($defaults) ? $defaults : array();
+?>
 <p>
     <label for="txtName"><span class="label">Naam:</span></label><input class="property" type="text" id="txtName" name="txtName" value=""><br/>
     <label for="txtSubid"><span class="label">SubId<span class="subLabel"> (Optioneel)</span>:</span></label><input class="property" type="text" id="txtSubid" name="txtSubid" value="">
@@ -25,19 +28,17 @@
     <label for="txtTitle"><span class="label">Titel:</span></label><input type="text" class="property" name="txtTitle" id="txtTitle" /><br/>
     <?php endif ?>
     <label for="txtBackgroundColor"><span class="label">Achtergrond:</span></label><input type="text" class="color property" name="txtBackgroundColor" id="txtBackgroundColor" value="FFFFFF"/><br/>
-    <label for="txtTextColor"><span class="label">Tekst:</span></label><input type="text" class="color property" name="txtTextColor" id="txtTextColor" value="CB0100"/><br/>
-    <label for="txtLinkColor"><span class="label">Link:</span></label><input type="text" class="color property" name="txtLinkColor" id="txtLinkColor" value="0000FF"/><br/>
+    <label for="txtTextColor"><span class="label">Tekst:</span></label><input type="text" class="color property" name="txtTextColor" id="txtTextColor" value="0000FF"/><br/>
+    <label for="txtLinkColor"><span class="label">Link:</span></label><input type="text" class="color property" name="txtLinkColor" id="txtLinkColor" value="000000"/><br/>
     <label for="txtBorderColor"><span class="label">Rand:</span></label><input type="text" class="color property" name="txtBorderColor" id="txtBorderColor" value="D2D2D2"/><br/>
 <?php if (in_array('width', $properties) || in_array('cols', $properties)) : ?>
 <p>
     <?php if (in_array('width', $properties)) : ?>
-    <span class="label">Breedte:</span><span id="widthDisplay">250</span>
-    <input class="property hide" type="hidden" id="txtWidth" name="txtWidth" value="250" />
+    <span class="label">Breedte:</span><input class="property" type="text" id="txtWidth" name="txtWidth" value="<?php echo (int) (isset($defaults['txtWidth']) ? $defaults['txtWidth'] : 250) ?>" />
     <div class="slider" id="widthSlider"></div>
     <?php endif ?>
     <?php if (in_array('cols', $properties)) : ?>
-    <span class="label">Kolommen:</span><span id="colsDisplay">1</span>
-    <input class="property hide" type="hidden" id="txtCols" name="txtCols" value="1" />
+    <span class="label">Kolommen:</span><input class="property" type="text" id="txtCols" name="txtCols" value="<?php echo (int) (isset($defaults['txtCols']) ? $defaults['txtCols'] : 1) ?>" />
     <div class="slider" id="colsSlider"></div>
     <?php endif ?>
 </p>

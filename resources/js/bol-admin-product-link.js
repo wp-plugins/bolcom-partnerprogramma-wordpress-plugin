@@ -39,25 +39,40 @@ var BolProductDialog = {
         jQuery('#widthSlider').slider({
             min: 180,
             max: 800,
+            value: jQuery('#txtWidth').val(),
             slide: function(event, ui) {
-                jQuery('#widthDisplay').html(ui.value);
                 jQuery('#txtWidth').val(ui.value);
                 BolProductDialog.calculateRowsCols();
             },
             stop: BolProductDialog.getProductPreview
         });
+        jQuery('#txtWidth').blur(function (event) {
+            jQuery('#widthSlider').slider("value", jQuery('#txtWidth').val());
+            BolProductDialog.calculateRowsCols();
+        });
+
         jQuery('#colsSlider').slider({
             min: 1,
             max: 2,
+            value: jQuery('#txtCols').val(),
             slide: function(event, ui) {
-                jQuery('#colsDisplay').html(ui.value);
                 jQuery('#txtCols').val(ui.value);
             },
             stop: BolProductDialog.getProductPreview
         });
+        jQuery('#txtCols').blur(function (event) {
+            jQuery('#colsSlider').slider("value", jQuery('#txtCols').val());
+            BolProductDialog.calculateRowsCols();
+        });
 
         BolProductDialog.calculateRowsCols();
         BolProductDialog.initStyleUpdater();
+
+        $( "#tabs-container" ).bind( "tabsselect", function(event, ui) {
+            if (ui.tab.hash == '#tab-widget') {
+                BolProductDialog.getProductPreview();
+            }
+        });
 
         // Init the tabs
         jQuery('#tabs-container').tabs().fadeIn(300);
@@ -74,7 +89,15 @@ var BolProductDialog = {
 
         // Attach event handlers to search button and preview button
         jQuery('#apply-search').click(BolProductDialog.getProductSearch);
+        jQuery('#txtBolSearch').keypress(function(event) {
+            if ( event.which == 13 ) {
+                event.preventDefault();
+                BolProductDialog.getProductSearch(event);
+            }
+        });
         jQuery('#apply-preview').click(BolProductDialog.getProductPreview);
+
+        jQuery('.triggerPreview').change(BolProductDialog.getProductPreview);
 
     },
 

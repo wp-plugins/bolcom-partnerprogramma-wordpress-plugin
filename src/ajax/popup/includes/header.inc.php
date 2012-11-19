@@ -23,7 +23,7 @@ if (! is_user_logged_in()) {
 <head>
     <title>Bol.com <?php echo $subTitle ?></title>
     <?php if (!isset($_REQUEST['widget'])):?>
-    <script type="text/javascript" src="/wp-includes/js/tinymce/tiny_mce_popup.js"></script>
+    <script type="text/javascript" src="<?php echo get_settings('home') ?>/wp-includes/js/tinymce/tiny_mce_popup.js"></script>
     <?php endif ?>
     <script type="text/javascript">var bol_partner_plugin_base = '<?php echo BOL_PARTNER_PLUGIN_PATH ?>';</script>
     <script type="text/javascript" src="<?php echo BOL_PARTNER_PLUGIN_PATH ?>/resources/js/jquery-1.4.2.min.js"></script>

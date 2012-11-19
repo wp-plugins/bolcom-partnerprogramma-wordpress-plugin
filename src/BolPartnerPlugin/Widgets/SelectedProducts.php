@@ -12,6 +12,8 @@
  */
 namespace BolPartnerPlugin\Widgets;
 
+use BolPartnerPlugin\Widgets\Renderer\ProductLinksRenderer;
+
 class SelectedProducts extends Widget
 {
     /**
@@ -121,12 +123,22 @@ class SelectedProducts extends Widget
 
         $this->addPlaceHolder($attributes);
 
-        // @todo: format the placeholders more to accomodate look and feel before ajax call!
+        $productCount = explode(',', $attributes['products']);
+        $productRenderer = new ProductLinksRenderer($this->getEmptyProducts(count($productCount)), $attributes);
 
         return sprintf(
-            '<div class="BolPartner_SelectedProducts_PlaceHolder" id="%s"></div>',
-            $attributes['block_id']
+            '<div class="BolPartner_SelectedProducts_PlaceHolder" id="%s">%s</div>',
+            $attributes['block_id'], $productRenderer
         );
+    }
+
+    protected function getEmptyProducts($count)
+    {
+        $products = array();
+        for ($i = 0; $i < $count; ++$i) {
+            $products[] = new \BolOpenApi\Model\Product();
+        }
+        return $products;
     }
 
     /**

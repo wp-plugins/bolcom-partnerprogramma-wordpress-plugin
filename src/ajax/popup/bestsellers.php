@@ -21,17 +21,17 @@ $bolSearch = BOL_PARTNER_PLUGIN_PATH . '/src/ajax/bol-search.php';
             </select><br/>
 
             <label id="labelBolSubCategory" for="ddlBolSubCategory"><span class="label">Selecteer categorie:</span></label>
-            <select class="" name="ddlBolSubCategory" id="ddlBolSubCategory" disabled="disabled" style="width: 40%">
+            <select class="triggerPreview" name="ddlBolSubCategory" id="ddlBolSubCategory" disabled="disabled" style="width: 40%">
                 <option value="0">- Selecteer subcategorie -</option>
             </select><span class="loader hideElement"></span><br/>
 
             <label id="labelBolSub2Category" for="ddlBolSub2Category"><span class="label">Selecteer subcategorie:</span></label>
-            <select class="" name="ddlBolSub2Category" id="ddlBolSub2Category" disabled="disabled" style="width: 40%">
+            <select class="triggerPreview" name="ddlBolSub2Category" id="ddlBolSub2Category" disabled="disabled" style="width: 40%">
                 <option value="0">- Selecteer subcategorie -</option>
             </select><span class="loader hideElement"></span><br/>
 
             <label id="labelBolSub3Category" for="ddlBolSub3Category"><span class="label">Selecteer tricategorie:</span></label>
-            <select class="" name="ddlBolSub3Category" id="ddlBolSub3Category" disabled="disabled" style="width: 40%">
+            <select class="triggerPreview" name="ddlBolSub3Category" id="ddlBolSub3Category" disabled="disabled" style="width: 40%">
                 <option value="0">- Selecteer subcategorie -</option>
             </select><span class="loader hideElement"></span><br/>
 
