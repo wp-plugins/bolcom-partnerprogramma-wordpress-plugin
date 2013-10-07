@@ -1,3 +1,10 @@
+h1,h2,h3,h4,h5 {
+    font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",sans-serif
+}
+
+.wrap {
+    padding: 0 10px;
+}
 #bolAdminPopup {
     font-size: 12px;
     font-family: sans-serif;
@@ -7,7 +14,7 @@
     display: none;
 }
 #widthSlider, #colsSlider {
-    width: 300px;
+    width: 347px;
     border: 1px solid #c6c6c6;
 }
 #bolAdminPopup span.infix {
@@ -24,15 +31,21 @@
     padding-bottom: 0;
 }
 #tab-widget #bol_previewParent {
-    height: 645px;
+    height: 625px;
+    margin: 40px 0 0;
+    width: 440px;
+
 }
 #bolAdminPopup .mceActionPanel {
     position: absolute;
     bottom: 0px;
     left: 10px;
 }
+#bolAdminPopup .actionPanel {
+    padding: 10px;
+}
 #tab-search .bol_pml_box {
-    padding-top: 0;
+    padding-top: 5px;
     padding-bottom: 0;
 }
 /*#bolAdminPopup a img {
@@ -41,8 +54,9 @@
 #bol_previewParent {
     clear: both;
     padding-top: 10px;
-    width: 395px;
-    height: 700px;
+    height: 625px;
+    margin: 40px 0 0;
+    width: 440px;
     overflow: auto;
 }
 .bol-popup-dialog {
@@ -54,7 +68,7 @@
 .ui-widget-header{
     background: none;
     border: none;
-    border-bottom: 1px solid #636363;
+    border-bottom: 1px solid #CCC;
     -webkit-border-radius: 0;
     border-radius: 0;
 }
@@ -110,7 +124,7 @@ ul.productlist {
     width: 250px;
     font-family: Verdana, Arial, sans-serif;
     font-size: 11px;
-    color: #CB0100;
+    color: #000000;
     margin-bottom: 5px;
 }
 .bol_pml_box h4 {
@@ -179,6 +193,9 @@ ul.productlist {
 .bol_pml_element .bol_pml_price {
     padding-bottom: 0;
     line-height: 2em;
+}
+.bol_pml_element .bol_pml_price_type {
+    display: inline;
 }
 .bol_pml_element .rating im {
     display: block;
@@ -273,4 +290,28 @@ ul.productlist {
 }
 #dvSelectedProducts .bol_pml_element .toggle-product-icon {
     background: url(../images/icon_delete_button.gif) top left no-repeat;
+}
+
+input.color {
+    background-clip: padding-box;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+}
+.promotions.postbox h3.hndle {
+    padding: 0;
+    margin: 0 !important;
+}
+.promotions .inside {
+    margin: 0 !important;
+}
+.promotions.postbox h3 span {
+    font-family: Georgia,"Times New Roman","Bitstream Charter",Times,serif;
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 1;
+    margin: 0;
+    padding: 7px 10px;
+    display: block;
+    cursor: pointer;
+    color: #21759B;
 }

@@ -70,6 +70,17 @@ class ProductSearchFormRenderer extends ProductLinksRenderer
         $this->options['image_width'] = $this->options['image_size'] ? 65 : 45;
 
         $renderer = new ProductRenderer();
+
+        // Check or old setting text_color is set
+        if (!empty($this->options['text_color'])) {
+            // Reset all new option color options to the old color, so the rendering is the same as before
+            // this only applies to shortcodes without subtitle_color, pricetype_color, price_color and deliverytime_color undefined
+            $this->options['subtitle_color'] = $this->options['text_color'];
+            $this->options['pricetype_color'] = $this->options['text_color'];
+            $this->options['price_color'] = $this->options['text_color'];
+            $this->options['deliverytime_color'] = $this->options['text_color'];
+        }
+
         $renderer->setOptions($this->options);
 
         $productsBody = '';
@@ -98,7 +109,8 @@ class ProductSearchFormRenderer extends ProductLinksRenderer
      * @param array $options
      *
      * @return string
-     */public function renderSearchBox(array $options)
+     */
+    public function renderSearchBox(array $options)
     {
         $id = $this->options['block_id'] . '_button_search';
 
@@ -106,7 +118,7 @@ class ProductSearchFormRenderer extends ProductLinksRenderer
 
         $html = '<div class="searchBox">' .
             '    <input type="text" name="search" value="%s">' .
-            '    <button class="searchButton" name="widget_search" id="%s">zoeken</button>' .
+            '    <button class="searchButton" name="widget_search" id="%s">' . __('Search', 'bolcom-partnerprogramma-wordpress-plugin') . '</button>' .
             '</div>';
 
         return sprintf($html, $default, $id);
@@ -133,7 +145,7 @@ class ProductSearchFormRenderer extends ProductLinksRenderer
 
         $catSelect = $options['cat_id'];
         $selectHtml = '<select class="catSelect">%s</select>';
-        $options = array(sprintf('<option value="%s">%s</option>', 0, '- Selecteer categorie -'));
+        $options = array(sprintf('<option value="%s">%s</option>', 0, '- ' . __('Select category', 'bolcom-partnerprogramma-wordpress-plugin') . ' -'));
         foreach ($this->getCategories() as $id => $category) {
             $selected = $catSelect == $id ? 'selected="selected"' : null;
             $options[] = sprintf('<option value="%s" %s>%s</option>', $id, $selected, $category);

@@ -9,15 +9,19 @@ var BolProductDialog = {
     properties : {
         'txtName'               : 'name',
         'txtSubid'              : 'sub_id',
+        'txtTitleColor'         : 'link_color',
+        'txtSubtitleColor'      : 'subtitle_color',
+        'txtPriceTypeColor'     : 'pricetype_color',
+        'txtPriceColor'         : 'price_color',
+        'txtDeliveryTimeColor'  : 'deliverytime_color',
         'txtBackgroundColor'    : 'background_color',
-        'txtTextColor'          : 'text_color',
-        'txtLinkColor'          : 'link_color',
         'txtBorderColor'        : 'border_color',
         'txtWidth'              : 'width',
         'txtCols'               : 'cols',
         'chkBolheader'          : 'show_bol_logo',
         'chkPrice'              : 'show_price',
         'chkRating'             : 'show_rating',
+        'chkDeliveryTime'       : 'show_deliverytime',
         'rbLinkTarget'          : 'link_target',
         'rbImageSize'           : 'image_size'
     },
@@ -32,7 +36,14 @@ var BolProductDialog = {
             data: {},
             success: function(response) {
                 jQuery("#categories-loader").remove();
-                jQuery("#ddlBolCategory").append(response);
+
+                // Check the result of the response
+                if (response.indexOf('option') != -1) {
+                    jQuery("#ddlBolCategory").append(response);
+                } else {
+                    // Error in the response, add the error
+                    jQuery('h4').after(response);
+                }
             }
         });
 
@@ -102,15 +113,86 @@ var BolProductDialog = {
     },
 
     initStyleUpdater : function() {
-        jQuery('#chkRating').click(function() { jQuery('span.rating').toggleClass('hide'); });
-        jQuery('#chkPrice').click(function() { jQuery('.bol_pml_price').toggleClass('hide'); });
+        jQuery('#ddlBolCategory').change(function() {
 
-        jQuery('#txtTextColor').change(function() {
-            jQuery('.bol_pml_box').css('color', '#' + jQuery(this).val());
+            // Link the dropdown values to the correct category
+            // This link determines which add array shown
+            var categories = {
+                'audio_navigatie' : [4005, 10714],
+                'baby' : [11271],
+                'boeken_int' : [8292, 8296, 8294, 8298, 8297, 8299],
+                'boeken_nl' : [8293, 8299],
+                'camera' : [4781],
+                'computer' : [4770, 10455, 10460, 7142, 7000, 7068, 3134],
+                //'crosscategorie' : [],
+                'dier_tuin_klussen' : [12748, 13155, 12974],
+                'dvd' : [3133],
+                'ebooks' : [8299],
+                'elektronica' : [4006, 10715, 4663, 7291, 7894, 3136],
+                'games' : [3135],
+                'home_entertainment' : [3136],
+                'huishoudelijk' : [10759, 11057],
+                'koken_tafelen_huishouden' : [10768, 11764],
+                'mooi_en_gezond' : [10823, 12382],
+                'muziek' : [3132],
+                'speelgoed' : [7934],
+                'telefoon_tablet' : [8349, 10656, 3137],
+                'wonen' : [14035]
+            };
+
+            var addCategory = new Array();
+            var selectedValue = jQuery('#ddlBolCategory').val();
+            for (var key in categories) {
+
+                categoryGroup = categories[key];
+
+                for (var categoryKey in categoryGroup) {
+                    categoryId = categoryGroup[categoryKey];
+                    if (selectedValue == categoryId) {
+                        addCategory[key] = key;
+                    }
+                }
+            }
+
+            // Hide all adds
+            jQuery('.add').addClass('hide');
+
+            // Remove the hide from the adds that should be shown
+            for (var key in addCategory) {
+                var key = '.add.' + addCategory[key];
+                jQuery(key).removeClass('hide');
+            }
+
+            jQuery('.promotions').removeClass('hide');
         });
 
-        jQuery('#txtLinkColor').change(function() {
-            jQuery('.bol_pml_box a.title').css('color', '#' + jQuery(this).val());
+        jQuery('.hndle').click(function() {
+           jQuery('.adds').toggleClass('hide');
+        })
+        jQuery('#chkBolheader').click(function() { jQuery('.BolWidgetLogo').toggleClass('hide'); });
+        jQuery('#chkRating').click(function() { jQuery('span.rating').toggleClass('hide'); });
+        jQuery('#chkPrice').click(function() { jQuery('.bol_pml_price').toggleClass('hide'); });
+        jQuery('#chkDeliveryTime').click(function() { jQuery('.bol_available').toggleClass('hide'); });
+
+        jQuery('#txtTitleColor').change(function() {
+            jQuery('.bol_pml_box .bol_pml_box_inner .product_details_mini .title').css('color', '#' + jQuery(this).val());
+            jQuery('.bol_pml_box .pager a').css('color', '#' + jQuery(this).val());
+        });
+
+        jQuery('#txtSubtitleColor').change(function() {
+            jQuery('.bol_pml_box .bol_pml_box_inner .product_details_mini .subTitle').css('color', '#' + jQuery(this).val());
+        });
+
+        jQuery('#txtPriceTypeColor').change(function() {
+            jQuery('.bol_pml_box .bol_pml_box_inner .product_details_mini .bol_pml_price .bol_pml_price_type').css('color', '#' + jQuery(this).val());
+        });
+
+        jQuery('#txtPriceColor').change(function() {
+            jQuery('.bol_pml_box .bol_pml_box_inner .product_details_mini .bol_pml_price').css('color', '#' + jQuery(this).val());
+        });
+
+        jQuery('#txtDeliveryTimeColor').change(function() {
+            jQuery('.bol_pml_box .bol_pml_box_inner .product_details_mini .bol_available').css('color', '#' + jQuery(this).val());
         });
 
         jQuery('#txtBackgroundColor').change(function() {
@@ -165,7 +247,7 @@ var BolProductDialog = {
         var properties = BolProductDialog._getProperties();
 
         if (properties.name.length < 1) {
-            alert('Het invullen van een "naam" is verplicht');
+            alert(i10n.requirename);
             return false;
         }
 
@@ -175,9 +257,9 @@ var BolProductDialog = {
 
             jQuery.post(url, properties, function(response){
                 if (response == 'success') {
-                    jQuery("#save-result").html('Changes saved.');
+                    jQuery("#save-result").html(i10n.changessaved);
                 } else {
-                    alert('Saving error');
+                    alert(i10n.savingerror);
                 }
             })
         } else {
@@ -203,11 +285,11 @@ var BolProductDialog = {
         var page = page > 0 ? page : 1;
 
         if (jQuery('#txtBolSearch').val() == '') {
-            alert('Vul een trefwoord in');
+            alert(i10n.requiresearchword);
             return false;
         }
 
-        jQuery('#dvResults').html('<span class="loader">Producten worden geladen </span>');
+        jQuery('#dvResults').html('<span class="loader">' + i10n.productsareloaded + '</span>');
 
         jQuery.ajax({
             url: bol_partner_plugin_base + '/src/ajax/bol-search.php',
@@ -241,7 +323,7 @@ var BolProductDialog = {
                         jQuery(this).append(toggle);
                     });
                 } else {
-                    jQuery("#dvResults").html('<div class="productlist">No products found</div>');
+                    jQuery("#dvResults").html('<div class="productlist">' + response + '</div>');
                 }
             }
         });
@@ -332,9 +414,7 @@ var BolProductDialog = {
             return false;
         }
 
-        jQuery('#bol_previewParent').html('<span class="loader">Loading preview</span><div id="' + properties.block_id + '"></div>');
-
-//        BolProductDialog.createStyle(properties, txtWidth, 230, 65);
+        jQuery('#bol_previewParent').html('<span class="loader">' + i10n.loadpreview + '</span><div id="' + properties.block_id + '"></div>');
 
         jQuery.ajax({
             url: bol_partner_plugin_base + '/src/ajax/bol-products-widget.php',
@@ -342,6 +422,23 @@ var BolProductDialog = {
             data: properties,
             success: function(response) {
                 $('#bol_previewParent').html(response);
+
+                // Make sure the correct fields are hidden
+                for(var key in properties) {
+                    var value = properties[key];
+                    if (key == 'show_bol_logo' && properties[key] == 0) {
+                        jQuery('.BolWidgetLogo').toggleClass('hide');
+                    }
+                    if (key == 'show_rating' && properties[key] == 0) {
+                        jQuery('span.rating').toggleClass('hide');
+                    }
+                    if (key == 'show_price' && properties[key] == 0) {
+                        jQuery('.bol_pml_price').toggleClass('hide');
+                    }
+                    if (key == 'show_deliverytime' && properties[key] == 0) {
+                        jQuery('.bol_available').toggleClass('hide');
+                    }
+                }
             }
         })
 
@@ -370,6 +467,9 @@ var BolProductDialog = {
 
             properties[BolProductDialog.properties[i]] = val;
         }
+
+        // Add extra property so on the server side we can identify this was a preview call
+        properties['admin_preview'] = 1;
 
         return properties;
     }

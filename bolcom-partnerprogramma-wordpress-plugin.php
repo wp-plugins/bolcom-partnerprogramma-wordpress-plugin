@@ -1,22 +1,18 @@
 <?php
 /*
 Plugin Name: Bol.com partner plugin for Wordpress
-Plugin URI: http://wordpress.org/extend/plugins/bol.com-partner/
+Plugin URI: http://wordpress.org/plugins/bolcom-partnerprogramma-wordpress-plugin/
 Description: This plugin is for bol.com affiliate partners. It enables the placement of Bol.com products from the Bol.com openAPI. Content can be added through the text editor and by widgets.
 Author: Netvlies Internetdiensten
-Version: 1.1.1
+Version: 1.2
 Author URI: http://www.netvlies.nl
 License: MIT
 */
-require_once 'vendor/autoload.php';
-
 if (PHP_VERSION_ID < 50300) {
-    add_action('admin_notices', function() {
-        echo '<div class="updated fade">Your PHP version is ' . PHP_VERSION . ', but to use the Bol.com partner plugin you need PHP version >= 5.3</div>';
-    });
-    return false;
+    exit('Your PHP version is ' . PHP_VERSION . ', but to use the Bol.com partner plugin you need PHP version >= 5.3');
 }
 
+require_once 'vendor/autoload.php';
 include_once 'src/BolPartnerPlugin/Plugin.php';
 include_once 'src/BolPartnerPlugin/PluginInstaller.php';
 
@@ -38,8 +34,21 @@ if (! defined('BOL_PARTNER_CONFIG_MENU_SLUG')) {
 //register_deactivation_hook( __FILE__, array( 'BolPartnerPlugin\Installer', 'deactivate' ) );
 //register_uninstall_hook( __FILE__, array( 'BolPartnerPlugin\Installer', 'uninstall' ) );
 
-// Loading the plugin class and widgets
+// Register translation
+function boldotcom_partnerplugin_load_textdomain()
+{
+    load_plugin_textdomain('bolcom-partnerprogramma-wordpress-plugin', false, basename( dirname( __FILE__ ) ) . '/resources/translation' );
+}
 
+add_action('init', 'boldotcom_partnerplugin_load_textdomain');
+
+// Loading the plugin class and widgets
 $config = parse_ini_file('config.ini', true);
-$bolPartnerPlugin = new BolPartnerPlugin\Plugin($config['plugin']);
+$class = 'BolPartnerPlugin\\Plugin';
+$bolPartnerPlugin = new $class($config['plugin']);
 $bolPartnerPlugin->init();
+
+// When activating plugin save options in the database
+register_activation_hook( __FILE__, array('BolPartnerPlugin\AdminPage\Config', 'activate'));
+
+

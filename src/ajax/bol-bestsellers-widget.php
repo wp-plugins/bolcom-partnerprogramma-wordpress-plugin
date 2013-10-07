@@ -31,7 +31,10 @@ function getProducts(Client $client, array $options, $type = 'toplist_default')
         $response = $client->listResults($type, $categoryId, $params);
         return $response->getProducts();
     } catch (\BolOpenApi\Exception $e) {
-        return array();
+        // Error occurred notify the user
+        echo __('Error: Connection with Bol.com cannot be established', 'bolcom-partnerprogramma-wordpress-plugin');
+    }  catch (\RuntimeException $e) {
+        echo __('Error: Connection with Bol.com cannot be established', 'bolcom-partnerprogramma-wordpress-plugin');
     }
 }
 
@@ -54,10 +57,22 @@ $accessKey = $partnerSettings['access_key'];
 $secretKey = $openApiSettings['access_key'];
 $client = ApiClientFactory::getCreateClient($accessKey, $secretKey);
 
+// We want to show a preview
+if (isset($_POST['admin_preview']) && $_POST['admin_preview'] == 1) {
+    // Render all elements that can be hidden
+    $options['show_bol_logo'] = 1;
+    $options['show_price'] = 1;
+    $options['show_rating'] = 1;
+    $options['show_deliverytime'] = 1;
+}
+
 $products = getProducts($client, $options);
 
 // display the products
 if (! empty($products)) {
+    // Add widget identifier
+    $options['widget_type'] = 'bestellers';
+
     $renderer = new ProductLinksRenderer($products, $options);
     echo $renderer;
 }

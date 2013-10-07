@@ -8,8 +8,8 @@
  * file that was distributed with this source code.
  */
 ?>
-<div style="float:left">Preview:</div>
-<div style="float:right"><input type="button" class="updateButton" id="apply-preview" name="preview" value="Vernieuwen" /></div>
+<div style="float:left"><?php _e('Preview', 'bolcom-partnerprogramma-wordpress-plugin') ?>:</div>
+<div style="float:right"><input type="button" class="button" id="apply-preview" name="preview" value="<?php _e('Refresh', 'bolcom-partnerprogramma-wordpress-plugin') ?>" /></div>
 <div id="previewDiv"></div>
 <div id="preview-box"></div>
 <div id="bol_previewParent"><div id="<?php echo str_replace('.css', '', $filename)?>"></div></div>

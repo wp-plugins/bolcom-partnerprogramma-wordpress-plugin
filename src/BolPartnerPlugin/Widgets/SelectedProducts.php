@@ -25,19 +25,13 @@ class SelectedProducts extends Widget
         'products' => '',
         'name' => '',
         'sub_id' => '',
-        'background_color' => 'FFFFFF',
-        'text_color' => 'CB0100',
-        'link_color' => '0000FF',
-        'border_color' => 'D2D2D2',
         'width' => '250',
         'cols' => '1',
-        'show_bol_logo' => false,
-        'show_price' => true,
-        'show_rating' => true,
         'link_target' => '1',
         'image_size' => '1',
         'custom_css' => false,
         'custom_css_style' => '',
+        'text_color' => '', // Kept for backwards compatibility
     );
 
     /**
@@ -50,6 +44,21 @@ class SelectedProducts extends Widget
      */
     public static function getDefaultAttributes()
     {
+        $default_settings = get_option('bol_default_settings');
+
+        self::$defaultAttributes['link_color'] = $default_settings['link_color'];
+        self::$defaultAttributes['subtitle_color'] = $default_settings['subtitle_color'];
+        self::$defaultAttributes['pricetype_color'] = $default_settings['pricetype_color'];
+        self::$defaultAttributes['price_color'] = $default_settings['price_color'];
+        self::$defaultAttributes['deliverytime_color'] = $default_settings['deliverytime_color'];
+        self::$defaultAttributes['background_color'] = $default_settings['background_color'];
+        self::$defaultAttributes['border_color'] = $default_settings['border_color'];
+
+        self::$defaultAttributes['show_bol_logo'] = $default_settings['show_bol_logo'];
+        self::$defaultAttributes['show_price'] = $default_settings['show_price'];
+        self::$defaultAttributes['show_rating'] = $default_settings['show_rating'];
+        self::$defaultAttributes['show_deliverytime'] = $default_settings['show_deliverytime'];
+
         return self::$defaultAttributes;
     }
 
@@ -57,7 +66,8 @@ class SelectedProducts extends Widget
      * Constructor
      */
     public function __construct() {
-        parent::__construct('bol_partner_selected_products', 'Bol.com Products Widget');
+
+        parent::__construct('bol_partner_selected_products', __('Bol.com Products Widget', 'bolcom-partnerprogramma-wordpress-plugin'));
         add_shortcode('bol_product_links', array($this, 'handleContentCodes'));
         add_action('admin_head', array($this, 'getAdminHead'));
         add_action('wp_footer', array($this, 'outputContentCodesJson'));
@@ -78,7 +88,7 @@ class SelectedProducts extends Widget
 
         $id = $this->option_name . '-' . $this->number;
 
-        $html = '<a href="#%s" id="%s" onclick="bol_openPopupSelected(); return false;">Widget settings...</a><br/><br/>
+        $html = '<a href="#%s" id="%s" onclick="bol_openPopupSelected(); return false;">' . __('Widget settings...', 'bolcom-partnerprogramma-wordpress-plugin') . '</a><br/><br/>
             <div id="bol-selected-products-widget-popup"></div>';
 
         echo sprintf($html, $id, $id);
@@ -119,11 +129,13 @@ class SelectedProducts extends Widget
             return false;
         }
 
-        $attributes['show_bol_logo'] = '0'; // explicit
+        // Explicitly don't show the bol logo for selected products
+        $attributes['show_bol_logo'] = '0';
 
         $this->addPlaceHolder($attributes);
 
         $productCount = explode(',', $attributes['products']);
+
         $productRenderer = new ProductLinksRenderer($this->getEmptyProducts(count($productCount)), $attributes);
 
         return sprintf(
@@ -147,7 +159,7 @@ class SelectedProducts extends Widget
      */
     protected function filterShortCodes(array $attributes)
     {
-        return shortcode_atts(self::$defaultAttributes, $attributes);
+        return shortcode_atts(self::getDefaultAttributes(), $attributes);
     }
 
     /**
@@ -182,7 +194,7 @@ class SelectedProducts extends Widget
                         + '</div>'
                 );
                 jQuery("#dvPopupDialog").dialog({
-                    title: "bol.com Products widget settings",
+                    title: "<?php _e('Bol.com Products widget settings', 'bolcom-partnerprogramma-wordpress-plugin'); ?>",
                     autoOpen: true,
                     modal: true,
                     resizable: false,

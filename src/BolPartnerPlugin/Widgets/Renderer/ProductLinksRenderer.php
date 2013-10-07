@@ -60,6 +60,17 @@ class ProductLinksRenderer
         $this->options['image_width'] = $this->options['image_size'] ? 65 : 45;
 
         $renderer = new ProductRenderer();
+
+        // Check or old setting text_color is set
+        if (!empty($this->options['text_color'])) {
+            // Reset all new option color options to the old color, so the rendering is the same as before
+            // this only applies to shortcodes without subtitle_color, pricetype_color, price_color and deliverytime_color undefined
+            $this->options['subtitle_color'] = $this->options['text_color'];
+            $this->options['pricetype_color'] = $this->options['text_color'];
+            $this->options['price_color'] = $this->options['text_color'];
+            $this->options['deliverytime_color'] = $this->options['text_color'];
+        }
+
         $renderer->setOptions($this->options);
 
         $productsBody = '';
@@ -100,7 +111,7 @@ class ProductLinksRenderer
         $page = (int) floor($offset / $options['limit']) + 1;
         $page = $page < 1 ? 1 : $page;
 
-        $pagerRenderer = new PagerRenderer($pages, $page);
+        $pagerRenderer = new PagerRenderer($pages, $page, $this->options);
         return $pagerRenderer->render();
     }
 

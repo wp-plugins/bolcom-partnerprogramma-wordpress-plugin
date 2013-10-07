@@ -107,6 +107,7 @@ class ProductRenderer
             $this->getSubtitle(),
             $this->getPrice(),
             $this->getRatingHtml(),
+            $this->getImpressionImage(),
             $this->getAvailabilityDescription()
         );
     }
@@ -127,6 +128,7 @@ class ProductRenderer
             '        <a class="title" target="%s" href="%s" title="%s" style="%s">%s</a>' .
             '        %s' .
             '       </span>' .
+            '        %s' .
             '        %s' .
             '        %s' .
             '        %s' .
@@ -178,6 +180,42 @@ class ProductRenderer
 
     }
 
+    protected function getSubTitleCss()
+    {
+        $cssOptions = array(
+            'subtitle_color' => 'color: #%s;',
+        );
+
+        return $this->getCss($cssOptions);
+    }
+
+    protected function getPriceTypeCss()
+    {
+        $cssOptions = array(
+            'pricetype_color' => 'color: #%s;',
+        );
+
+        return $this->getCss($cssOptions);
+    }
+
+    protected function getPriceCss()
+    {
+        $cssOptions = array(
+            'price_color' => 'color: #%s;',
+        );
+
+        return $this->getCss($cssOptions);
+    }
+
+    protected function getDeliveryTimeCss()
+    {
+        $cssOptions = array(
+            'deliverytime_color' => 'color: #%s',
+        );
+
+        return $this->getCss($cssOptions);
+    }
+
     protected function getBestPrice()
     {
         if (! isset($this->options['show_price']) || ! $this->options['show_price']) {
@@ -197,7 +235,8 @@ class ProductRenderer
 
         $price = number_format((double) $bestOffer->getPrice(), 2, '.', '');
 
-        return $price > 0 ? sprintf('<span class="price">Beste prijs: &euro; %s</span>', $price) : '';
+        $priceText = __('Best price', 'bolcom-partnerprogramma-wordpress-plugin');
+        return $price > 0 ? sprintf('<span class="price"> %s: &euro; %s</span>', $priceText, $$price) : '';
     }
 
     protected function getPrice()
@@ -214,35 +253,58 @@ class ProductRenderer
         }
 
         $bolOffers = $this->getBolOffers($offers);
+        $resellerOffers = $this->getResellerOffers($offers);
         $secondHand = $this->getSecondHandOffers($offers);
-
-        // currently we do not show resellers
-//        $resellerOffers = $this->getResellerOffers($offers);
 
         uasort($offers, array($this, 'sortOffers'));
 
-        $hasSecondHand = count($secondHand) ? reset($secondHand) : false;
         $normal = count($bolOffers) ? reset($bolOffers) : null;
+        $hasResellerOffers = count($resellerOffers) ? reset($resellerOffers) : false;
+        $hasSecondHand = count($secondHand) ? reset($secondHand) : false;
 
-        $offer = (is_null($normal) || ($normal->getAvailabilityDescription() == 'Niet leverbaar.')) && ($hasSecondHand !== false)
-            ? $hasSecondHand : $normal;
+        // Standard show the normal offer
+        $offer = $normal;
+
+        // When no normal offers are found then show another offer
+        if (is_null($offer) || ($offer->getAvailabilityDescription() == 'Niet leverbaar.')) {
+            // When a valid resellerOffer is found show this one
+            if ($hasResellerOffers !== false) {
+
+                $offer = $hasResellerOffers;
+
+            } else if ($hasSecondHand !== false) {
+                // When no normal offers or resellerOffers are found then show secondHand offer
+                $offer = $hasSecondHand;
+            }
+        }
 
         if (! is_object($offer) || (! $offer->getPrice() && ! $offer->getListPrice())) {
             return '';
         }
 
         $price = $offer->getPrice() == '' ? $offer->getListPrice() : $offer->getPrice();
+
         /* @var $offer \BolOpenApi\Model\Offer */
         $price = number_format((double) $price, 2, '.', '');
 
-        $priceTitle = $offer == $hasSecondHand ? 'Vanaf' : 'Prijs:';
+        if ($offer == $hasResellerOffers || $offer == $hasSecondHand) {
+            $priceTitle = __('From', 'bolcom-partnerprogramma-wordpress-plugin');
+        } else {
+            $priceTitle = __('Price', 'bolcom-partnerprogramma-wordpress-plugin');
+        }
 
-        $html = '<span class="bol_pml_price">' . $priceTitle . ' &euro; %s</span>';
-        return ($price > 0) ? sprintf($html, $price) : '';
+        $priceTitle = sprintf('<span class="bol_pml_price_type" style="%s">%s</span>', $this->getPriceTypeCss() , $priceTitle);
+
+        $html = '<span class="bol_pml_price" style="%s">' . $priceTitle . ' &euro; %s</span>';
+        return ($price > 0) ? sprintf($html, $this->getPriceCss(), $price) : '';
     }
 
     protected function getAvailabilityDescription()
     {
+        if (! isset($this->options['show_deliverytime']) || ! $this->options['show_deliverytime']) {
+            return '';
+        }
+
         $offers = $this->product->getOffers();
         $offers = $offers ? $offers->getOffers() : array();
 
@@ -250,24 +312,38 @@ class ProductRenderer
             return '';
         }
 
+        // Get the different offers
+        $bolOffers = $this->getBolOffers($offers);
+        $resellerOffers = $this->getResellerOffers($offers);
+        $secondHand = $this->getSecondHandOffers($offers);
+
+        // Sort the offers
         uasort($offers, array($this, 'sortOffers'));
 
-        $hasSecondHand = false;
-        $normal = null;
-        foreach ($offers as $offer) {
-            if (($hasSecondHand == false) && $offer->getSecondHand()) {
-                $hasSecondHand = $offer;
-                continue;
+        $normal = count($bolOffers) ? reset($bolOffers) : null;
+        $hasResellerOffers = count($resellerOffers) ? reset($resellerOffers) : false;
+        $hasSecondHand = count($secondHand) ? reset($secondHand) : false;
+
+        // Standard show the normal offer
+        $offer = $normal;
+
+        // When no normal offers are found then show another offer
+        if (is_null($offer) || ($offer->getAvailabilityDescription() == 'Niet leverbaar.')) {
+
+            // When a valid resellerOffer is found show this one
+            if ($hasResellerOffers !== false) {
+                $availability = $hasResellerOffers->getAvailabilityDescription();
+
+            } else if ($hasSecondHand !== false) {
+                // When no normal offers or resellerOffers are found then show secondHand offer
+                $availability = '2<super>e</super> hands beschikbaar';
             }
-            if (! $offer->getSecondHand() && $offer->getPrice() > 0) {
-                $normal = $offer;
-            }
+        } else {
+            // Initialize the availability description
+            $availability = $offer->getAvailabilityDescription();
         }
 
-        $availability = (is_null($normal) || ($normal->getAvailabilityDescription() == 'Niet leverbaar.')) && ($hasSecondHand !== false)
-            ? '2<super>e</super> hands beschikbaar' : $normal->getAvailabilityDescription();
-
-        return sprintf('<span class="bol_available">%s</span>', $availability);
+        return sprintf('<span class="bol_available" style="%s">%s</span>', $this->getDeliveryTimeCss(), $availability);
     }
 
     protected function getBolOffers(array $offers)
@@ -284,6 +360,22 @@ class ProductRenderer
         }
 
         return $bolOffers;
+    }
+
+    protected function getResellerOffers(array $offers)
+    {
+        $resellerOffers = array();
+        foreach ($offers as $offer) {
+            if ($offer->getSeller()->getId() !== '0' && ($offer->getSecondHand() === 'false' || $offer->getSecondHand() == '')) {
+                $resellerOffers[] = $offer;
+            }
+        }
+
+        if (count($resellerOffers) > 1) {
+            uasort($resellerOffers, array($this, 'sortOffers'));
+        }
+
+        return $resellerOffers;
     }
 
     protected function getSecondHandOffers(array $offers)
@@ -330,7 +422,7 @@ class ProductRenderer
         $method = 'get' . ucfirst($type) . 'SubTitle';
 
         $subTitle = method_exists($this, $method) ? $this->$method() : $this->product->getSubtitle();
-        return empty($subTitle) ? '' : sprintf('<span class="subTitle">%s</span>', $subTitle);
+        return empty($subTitle) ? '' : sprintf('<span class="subTitle" style="%s">%s</span>', $this->getSubTitleCss(), $subTitle);
     }
 
     protected function getBookSubTitle()
@@ -398,17 +490,7 @@ class ProductRenderer
 
     protected function getLink()
     {
-        $str = 'p=1&amp;t=url&amp;s=%s&amp;url=%s&amp;f=API&amp;subid=%s&amp;name=%s';
-
-        $urls = $this->product->getUrls();
-
-        $link = sprintf(
-            $str,
-            $this->options['partnerId'],
-            $urls ? urlencode($this->product->getUrls()->getMain()) : '#',
-            $this->options['sub_id'],
-            urlencode($this->options['name'])
-        );
+        $link = $this->getUrl();
 
         return 'http://partnerprogramma.bol.com/click/click?' . $link;
     }
@@ -447,4 +529,45 @@ class ProductRenderer
         return empty($html) ? '' : $html;
     }
 
+    public function getImpressionImage()
+    {
+        $link = $this->getUrl();
+
+        return '<img width="1" height="1" src="http://partnerprogramma.bol.com/click/impression?' . $link . '" alt="">';
+    }
+
+    private function getUrl()
+    {
+        // Determine the type of widget
+        switch($this->options['widget_type']) {
+            case 'search-form':
+                $type = 'WP_SBX';
+
+                break;
+            case 'product-link':
+                $type = 'WP_PDL';
+
+                break;
+            case 'bestellers':
+                $type = 'WP_BSL';
+
+                break;
+            default:
+                $type = 'API';
+        }
+
+        $str = 'p=1&amp;t=url&amp;s=%s&amp;url=%s&amp;f=' . $type . '&amp;subid=%s&amp;name=%s';
+
+        $urls = $this->product->getUrls();
+
+        $link = sprintf(
+            $str,
+            $this->options['partnerId'],
+            $urls ? urlencode($this->product->getUrls()->getMain()) : '#',
+            $this->options['sub_id'],
+            urlencode($this->options['name'])
+        );
+
+        return $link;
+    }
 }
