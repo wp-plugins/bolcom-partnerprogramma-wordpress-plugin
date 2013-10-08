@@ -50,7 +50,7 @@ class Widget extends \WP_Widget {
     /** @see WP_Widget::form */
     function form($instance) {
         $id = $this->get_field_id('title');
-        $label = 'Widget title:';
+        $label = __('Widget title', 'bolcom-partnerprogramma-wordpress-plugin') . ':';
         $inputName = $this->get_field_name('title');
         $inputValue = $instance['title'];
 

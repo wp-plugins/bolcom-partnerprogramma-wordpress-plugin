@@ -20,7 +20,16 @@ use BolPartnerPlugin\Widgets\SearchForm;
 function getCategories(Client $client, $id = 0)
 {
     $options = array('includeRefinements' => false);
-    $response = $client->listResults('toplist_default', $id, $options);
+
+    try {
+        $response = $client->listResults('toplist_default', $id, $options);
+    } catch (\Exception $e) {
+        // Error occurred notify the user
+        echo __('Error: Connection with Bol.com cannot be established', 'bolcom-partnerprogramma-wordpress-plugin'); die;
+    } catch (\RuntimeException $e) {
+        echo __('Error: Connection with Bol.com cannot be established', 'bolcom-partnerprogramma-wordpress-plugin'); die;
+    }
+
     return $response->getCategories();
 }
 
@@ -43,9 +52,11 @@ function getResult(Client $client, array $options, $type = 'toplist_default')
 
     try {
         $response = $client->listResults($type, $categoryId, $params);
-        return $response;
-    } catch (\BolOpenApi\Exception $e) {
-        return array();
+    } catch (\Exception $e) {
+        // Error occurred notify the user
+        echo __('Error: Connection with Bol.com cannot be established', 'bolcom-partnerprogramma-wordpress-plugin');
+    } catch (\RuntimeException $e) {
+        echo __('Error: Connection with Bol.com cannot be established', 'bolcom-partnerprogramma-wordpress-plugin');
     }
 }
 
@@ -59,6 +70,11 @@ function getResult(Client $client, array $options, $type = 'toplist_default')
  */
 function getSearch(Client $client, $text, $category = 0, $limit = 10, $offset = 0)
 {
+    // When no search term is given return
+    if (empty($text)) {
+        return;
+    }
+
     $options = array(
         'offset' => $offset,
         'nrProducts' => $limit,
@@ -72,7 +88,10 @@ function getSearch(Client $client, $text, $category = 0, $limit = 10, $offset = 
         $response = $client->searchResults($text, $options);
         return $response;
     } catch (\BolOpenApi\Exception $e) {
+        // Error occurred notify the user
         return null;
+    } catch (\RuntimeException $e) {
+        echo __('Error: Connection with Bol.com cannot be established', 'bolcom-partnerprogramma-wordpress-plugin'); die;
     }
 }
 
@@ -100,6 +119,22 @@ $result = getSearch($client, $options['default_search'], $options['cat_id'], $op
 
 // display the products
 $options['totalResults'] = is_null($result) ? 0 : $result->getTotalResultSize();
+
+// We want to show a preview
+if (isset($_POST['admin_preview']) && $_POST['admin_preview'] == 1) {
+    // Render all elements that can be hidden
+    $options['show_bol_logo'] = 1;
+    $options['show_price'] = 1;
+    $options['show_rating'] = 1;
+    $options['show_deliverytime'] = 1;
+}
+
+// Add widget identifier
+$options['widget_type'] = 'search-form';
+
 $renderer = new ProductSearchFormRenderer($result, $options);
-$renderer->setCategories(getCategories($client));
+
+$categories = getCategories($client);
+
+$renderer->setCategories($categories);
 echo $renderer;

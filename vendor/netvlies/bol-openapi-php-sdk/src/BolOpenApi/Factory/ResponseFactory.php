@@ -59,6 +59,7 @@ class ResponseFactory
         $searchResultsResponse = new SearchResultsResponse();
         $this->mapAbstractCollectionResponse($searchResultsResponse, $xmlElement);
 
+
         return $searchResultsResponse;
     }
 

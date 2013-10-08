@@ -19,7 +19,9 @@ class PagerRenderer
 
     protected $maxPages = 5;
 
-    public function __construct($pages = null, $page = null)
+    protected $options;
+
+    public function __construct($pages = null, $page = null, $options)
     {
         if (! is_null($pages)) {
             $this->setPages($pages);
@@ -28,6 +30,8 @@ class PagerRenderer
         if (! is_null($page)) {
             $this->setPage($page);
         }
+
+        $this->options = $options;
     }
 
     public function render()
@@ -81,11 +85,36 @@ class PagerRenderer
     public function renderPagerPage($page, $content)
     {
         $class = $this->page == $page ? 'currentPagerLink' : 'pagerLink';
-        return sprintf($this->getPageHtml(), $page, $class, $content);
+        $style = $this->getLinkCss();
+        return sprintf($this->getPageHtml(), $page, $class, $style, $content);
+    }
+
+    protected function getLinkCss()
+    {
+        $cssOptions = array(
+            'link_color' => 'color: #%s;',
+        );
+
+        return $this->getCss($cssOptions);
+
+    }
+
+    protected function getCss($cssOptions)
+    {
+        $css = '';
+
+        foreach ($cssOptions as $id => $cssElem) {
+            if (! isset($this->options[$id])) {
+                continue;
+            }
+            $css .= sprintf($cssElem, $this->options[$id]);
+        }
+        return $css;
+
     }
 
     public function getPageHtml()
     {
-        return '<a href="#%d" class="%s">%s</a>';
+        return '<a href="#%d" class="%s" style="%s">%s</a>';
     }
 }

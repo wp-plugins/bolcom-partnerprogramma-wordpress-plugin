@@ -154,6 +154,7 @@ class Plugin
 
         wp_enqueue_script('jquery', BOL_PARTNER_PLUGIN_PATH . '/resources/js/jquery-1.4.2.min.js', '1.4.2' );
         wp_enqueue_script('jquery-ui', BOL_PARTNER_PLUGIN_PATH . '/resources/js/jquery-ui-1.8.13.custom.min.js', array('jquery'), '1.8.13', true );
+        wp_enqueue_script('jscolor', BOL_PARTNER_PLUGIN_PATH . '/resources/js/jscolor.js');
         wp_enqueue_script('jquery-ui-dialog', false, array('jquery'), false, false);
         wp_enqueue_script('jquery-ui-tabs', false, array('jquery'), false, false);
         wp_enqueue_script('colorpicker', false, array('jquery'), false, false);
@@ -176,7 +177,7 @@ class Plugin
             'mce_external_plugins',
             function($plugin_array)
             {
-                $plugin_array['bolpartnerplugin'] = BOL_PARTNER_PLUGIN_PATH . '/resources/js/bol-tinymce-button.js';
+                $plugin_array['bolpartnerplugin'] = BOL_PARTNER_PLUGIN_PATH . '/resources/js/tinymce/bol-tinymce-button.js';
                 return $plugin_array;
             }
         );
@@ -212,11 +213,10 @@ class Plugin
     public function displayConfigErrorMessage()
     {
         $configUrl = admin_url('admin.php?page=' . $this->options['config_id']);
-        $msg = sprintf('%s: Plugin is not configured! '
-            . 'Please correct in the <a href="%s" target="_self">settings page</a>'
+        $msg = sprintf(__('%s: Plugin is not configured! Please correct in the <a href="%s" target="_self">settings page</a>', 'bolcom-partnerprogramma-wordpress-plugin')
             , $this->options['pageTitle'], $configUrl
         );
-        echo '<div class="updated fade">' . $msg . '</div>';
+        echo '<div class="updated fade"><p>' . $msg . '</p></div>';
     }
 
     /**
@@ -228,8 +228,11 @@ class Plugin
         $configPage = new Config();
         $configPage->init();
         $configPage->setParams($params);
+
         $configPage->process();
 
         echo $configPage->display();
     }
+
+
 }

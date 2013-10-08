@@ -21,12 +21,23 @@ function getProducts($client, array $productIds)
     $products = array();
 
     foreach ($productIds as $product) {
-        $response = $client->products($product);
 
-        if ($response->getProduct()) {
-            $products[] = $response->getProduct();
+        try {
+            $response = $client->products($product);
+
+            if ($response->getProduct()) {
+                $products[] = $response->getProduct();
+            }
+        } catch (\BolOpenApi\Exception $e) {
+            // Error occurred notify the user
+            echo __('Error: Connection with Bol.com cannot be established', 'bolcom-partnerprogramma-wordpress-plugin');
+            break;
+        } catch (\RuntimeException $e) {
+            echo __('Error: Connection with Bol.com cannot be established', 'bolcom-partnerprogramma-wordpress-plugin');
+            break;
         }
     }
+
     return $products;
 }
 
@@ -40,6 +51,7 @@ foreach ($valid as $id) {
     }
 }
 
+// @Todo Danny should this not be removed?
 $options = $_POST;
 $products = explode(',', trim($_POST['products'], ','));
 if (empty($products)) {
@@ -55,8 +67,22 @@ $accessKey = $partnerSettings['access_key'];
 $secretKey = $openApiSettings['access_key'];
 $client = ApiClientFactory::getCreateClient($accessKey, $secretKey);
 
+// We want to show a preview
+if (isset($_POST['admin_preview']) && $_POST['admin_preview'] == 1) {
+    // Render all elements that can be hidden
+    $options['show_bol_logo'] = 0;
+    $options['show_price'] = 1;
+    $options['show_rating'] = 1;
+    $options['show_deliverytime'] = 1;
+}
+
 $products = getProducts($client, $products);
 
 // display the products
-$renderer = new ProductLinksRenderer($products, $options);
-echo $renderer;
+if (! empty($products)) {
+    // Add widget identifier
+    $options['widget_type'] ='product-link';
+
+    $renderer = new ProductLinksRenderer($products, $options);
+    echo $renderer;
+}

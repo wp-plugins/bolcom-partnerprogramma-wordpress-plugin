@@ -45,7 +45,6 @@ var BolProductDialog = {
 
             if (jQuery('#txtTitle').val()) content += ' title="'+jQuery('#txtTitle').val()+'"';
             if (jQuery('#txtBackgroundColor').val()) content += ' background_color="#'+jQuery('#txtBackgroundColor').val()+'"';
-            if (jQuery('#txtTextColor').val()) content += ' text_color="#'+jQuery('#txtTextColor').val()+'"';
             if (jQuery('#txtLinkColor').val()) content += ' link_color="#'+jQuery('#txtLinkColor').val()+'"';
             if (jQuery('#txtBorderColor').val()) content += ' border_color="#'+jQuery('#txtBorderColor').val()+'"';
 
@@ -78,7 +77,6 @@ var BolProductDialog = {
                 "name": jQuery('#txtName').val(),
                 "subid": jQuery('#txtSubid').val(),
                 "background_color": jQuery('#txtBackgroundColor').val(),
-                "text_color": jQuery('#txtTextColor').val(),
                 "link_color": jQuery('#txtLinkColor').val(),
                 "border_color": jQuery('#txtBorderColor').val(),
                 "width": jQuery('#txtWidth').val(),
