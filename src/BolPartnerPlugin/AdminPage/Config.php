@@ -279,7 +279,7 @@ class Config implements AdminPage
         ?>
         <div class="wrap">
             <h2><img src="<?php echo BOL_PARTNER_PLUGIN_PATH ?>/resources/icon-bol-50x50.png" style="margin-right: 10px; position: relative; top: 7px;" width="32" height="32" alt="bol.com"/><?php _e('Bol.com partner plugin settings', 'bolcom-partnerprogramma-wordpress-plugin') ?>:</h2>
-            <p><?php _e('You can get API keys by registering on <a href="http://developers.bol.com" target="_blank">http://developers.bol.com</a> and then filling in the subscription form for the keys on your profile page. We ask you to use the same email address and website to register, that you have used inside the Partner Pogram. It is your own responsibility for what is performed through your identity key. Be carefull is stays yours and is not used in any other way.', 'bolcom-partnerprogramma-wordpress-plugin') ?></p>
+            <p><?php _e('You can get API keys by registering on <a href="http://developers.bol.com" target="_blank">http://developers.bol.com</a> and then filling in the subscription form for the keys on your profile page. We ask you to use the same email address and website to register, that you have used inside the Partner Pogram. It is your own responsibility for what is performed through your identity key. Be careful it stays yours and is not used in any other way.', 'bolcom-partnerprogramma-wordpress-plugin') ?></p>
 
             <?php
             // Check or the API settings are correctly and a connection can be made
@@ -302,10 +302,10 @@ class Config implements AdminPage
                         _e('Status returned by the Bol.com Open API:<br />', 'bolcom-partnerprogramma-wordpress-plugin');
 
                         if ($response->getStatusCode() == 200) {
-                            echo '<strong style="color:#80e631">' .__('Successfull', 'bolcom-partnerprogramma-wordpress-plugin') . '</strong><br /><br />';
+                            echo '<strong style="color:#80e631">' .__('Successful', 'bolcom-partnerprogramma-wordpress-plugin') . '</strong><br /><br />';
                             _e('Your Bol.com Open API settings are set correctly', 'bolcom-partnerprogramma-wordpress-plugin');
                         } else {
-                            // Unsuccessfull call
+                            // Unsuccessful call
                             echo '<strong style="color:#d51e2c">' . $response->getReasonPhrase() . '<br /> ' . htmlentities($response->getContent()) . '</strong>';
 
                             echo '<br /><br />';
@@ -319,6 +319,7 @@ class Config implements AdminPage
 
                     }  catch (\RuntimeException $e) {
                         echo __('Error: Connection with Bol.com cannot be established', 'bolcom-partnerprogramma-wordpress-plugin') . '<br /><br />';
+                        echo $e->getCode() . ' ' . $e->getMessage() . ' ' . $e->getFile() . ' ' . $e->getLine() .'<br /><br />';
                         _e('If you are sure your API keys are correct check the API status on <a href="http://developers.bol.com" target="_blank">http://developers.bol.com</a>', 'bolcom-partnerprogramma-wordpress-plugin');
                     }
 

@@ -28,6 +28,7 @@ class ApiClientFactory
     {
         $buzzClient = new BuzzClientCurl();
         $buzzClient->setMaxRedirects(0);
+        $buzzClient->setTimeout(10);
 
         $browser = new BuzzBrowser($buzzClient);
         $client = new Client($accessKey, $secretKey, $browser);

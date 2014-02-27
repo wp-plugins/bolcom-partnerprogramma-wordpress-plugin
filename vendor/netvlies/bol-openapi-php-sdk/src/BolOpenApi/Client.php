@@ -160,7 +160,6 @@ class Client
         }
 
         $response = $this->browser->get($scheme.$host.$url, $headers);
-
         if ($response->getStatusCode() === 503) {
             throw new BolException('Service Temporarily Unavailable', 503);
         }

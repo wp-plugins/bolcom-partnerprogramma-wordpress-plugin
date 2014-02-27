@@ -40,7 +40,7 @@
     <?php endif ?>
     <!--<link rel="stylesheet" type="text/css" href="/wp-admin/load-styles.php?c=1&dir=ltr&load=admin-bar,wp-admin,buttons">-->
     <link rel="stylesheet" type="text/css" href="<?php echo get_settings('home') ?>/wp-admin/load-styles.php?c=1&dir=ltr&load=admin-bar,buttons,media-views,wp-admin,wp-auth-check">
-    <link rel="stylesheet" type="text/css" href="<?php echo get_settings('home') ?>/wp-admin/css/colors-fresh.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo BOL_PARTNER_PLUGIN_PATH ?>/resources/css/colors-fresh.css">
     <link rel="stylesheet" type="text/css" href="<?php echo BOL_PARTNER_PLUGIN_PATH ?>/resources/css/jquery-ui-1.8.13.custom.css">
     <link rel="stylesheet" type="text/css" href="<?php echo BOL_PARTNER_PLUGIN_PATH ?>/resources/css/bol.css">
     <link rel="stylesheet" type="text/css" href="<?php echo BOL_PARTNER_PLUGIN_PATH ?>/resources/css/bol-search.css">

@@ -161,7 +161,6 @@ var BolBestsellersDialog = {
                 jQuery(key).removeClass('hide');
             }
 
-           //jQuery('.adds').removeClass('hide');
             jQuery('.promotions').removeClass('hide');
         });
         jQuery('.hndle').click(function() {

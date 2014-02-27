@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bolcom-partnerprogramma-wordpress-plugin\n"
-"POT-Creation-Date: 2013-09-23 14:54+0100\n"
-"PO-Revision-Date: 2013-09-23 15:18+0100\n"
+"POT-Creation-Date: 2014-01-29 10:26+0100\n"
+"PO-Revision-Date: 2014-01-29 10:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: Netvlies Internetdiensten\n"
 "Language: English\n"
@@ -93,7 +93,7 @@ msgid "Price type"
 msgstr "Prijs type"
 
 #: ../../src/BolPartnerPlugin/AdminPage/Config.php:141
-#: ../../src/BolPartnerPlugin/Widgets/Renderer/ProductRenderer.php:291
+#: ../../src/BolPartnerPlugin/Widgets/Renderer/ProductRenderer.php:293
 #: ../../src/ajax/popup/includes/properties.inc.php:75
 msgid "Price"
 msgstr "Prijs"
@@ -144,7 +144,7 @@ msgid ""
 "subscription form for the keys on your profile page. We ask you to use the "
 "same email address and website to register, that you have used inside the "
 "Partner Pogram. It is your own responsibility for what is performed through "
-"your identity key. Be carefull is stays yours and is not used in any other "
+"your identity key. Be careful it stays yours and is not used in any other "
 "way."
 msgstr ""
 "Je kunt de API keys verkrijgen door jezelf te registreren op <a href="
@@ -165,7 +165,7 @@ msgid "Status returned by the Bol.com Open API:<br />"
 msgstr "De ontvangen status van Bol.com Open API:<br />"
 
 #: ../../src/BolPartnerPlugin/AdminPage/Config.php:305
-msgid "Successfull"
+msgid "Successful"
 msgstr "Succesvol"
 
 #: ../../src/BolPartnerPlugin/AdminPage/Config.php:306
@@ -174,7 +174,7 @@ msgstr "Je Bol.com Open API instellingen zijn goed ingesteld"
 
 #: ../../src/BolPartnerPlugin/AdminPage/Config.php:313
 #: ../../src/BolPartnerPlugin/AdminPage/Config.php:318
-#: ../../src/BolPartnerPlugin/AdminPage/Config.php:322
+#: ../../src/BolPartnerPlugin/AdminPage/Config.php:323
 msgid ""
 "If you are sure your API keys are correct check the API status on <a href="
 "\"http://developers.bol.com\" target=\"_blank\">http://developers.bol.com</a>"
@@ -198,15 +198,15 @@ msgstr ""
 msgid "Error: Connection with Bol.com cannot be established"
 msgstr "Fout: Er kan geen verbinding worden gemaakt met Bol.com"
 
-#: ../../src/BolPartnerPlugin/AdminPage/Config.php:327
+#: ../../src/BolPartnerPlugin/AdminPage/Config.php:328
 msgid "Please set your API access key"
 msgstr "Stel je API access key in"
 
-#: ../../src/BolPartnerPlugin/AdminPage/Config.php:331
+#: ../../src/BolPartnerPlugin/AdminPage/Config.php:332
 msgid "Please set your API secret key"
 msgstr "Stel je API secret key in"
 
-#: ../../src/BolPartnerPlugin/AdminPage/Config.php:355
+#: ../../src/BolPartnerPlugin/AdminPage/Config.php:356
 msgid ""
 "Change the default settings of your new widgets. Settings of previous "
 "inserted widgets won't be changed."
@@ -262,11 +262,11 @@ msgstr "Zoeken"
 msgid "Select category"
 msgstr "Selecteer categorie"
 
-#: ../../src/BolPartnerPlugin/Widgets/Renderer/ProductRenderer.php:236
+#: ../../src/BolPartnerPlugin/Widgets/Renderer/ProductRenderer.php:238
 msgid "Best price"
 msgstr "Toon prijs"
 
-#: ../../src/BolPartnerPlugin/Widgets/Renderer/ProductRenderer.php:289
+#: ../../src/BolPartnerPlugin/Widgets/Renderer/ProductRenderer.php:291
 #: ../../src/ajax/popup/includes/add.inc.php:95
 msgid "From"
 msgstr "Vanaf"
