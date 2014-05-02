@@ -140,6 +140,9 @@ We (Netvlies Internetdiensten and bol.com partner program) are always interested
 
 == Changelog ==
 
+= 1.3.0 =
+* Fixed plugin for tinymce4 in Wordpress 3.9. Warning: < Wordpress 3.9 is no longer supported!
+
 = 1.2.1 =
 * Fixed styling issue with Wordpress version 3.8.1
 * Improved technical retrieval of promotions (now using cURL)

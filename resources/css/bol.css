@@ -1,7 +1,6 @@
 h1,h2,h3,h4,h5 {
     font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",sans-serif
 }
-
 .wrap {
     padding: 0 10px;
 }
@@ -314,4 +313,8 @@ input.color {
     display: block;
     cursor: pointer;
     color: #21759B;
+}
+
+i.mce-i-bolpartnerplugin {
+    background-image: url('../images/bol.gif');
 }
