@@ -1,145 +1,72 @@
 (function(){
 
-    tinymce.create('tinymce.plugins.bolpartnerplugin',{
 
-        _pluginFunctions : {
-            'product-link'  : 'BolCom.product-link',
-            'bestsellers'   : 'BolCom.bestsellers',
-            'search-form'   : 'BolCom.search-form'
-        },
 
-        _pluginHeight: {
-            'product-link'  : '800',
-            'bestsellers'   : '800',
-            'search-form'   : '840'
-        },
+    tinymce.PluginManager.add('bolpartnerplugin', function(editor, url) {
 
-        _pluginWidth: {
-            'product-link'  : '960',
-            'bestsellers'   : '960',
-            'search-form'   : '960'
-        },
+        editor.bolpartnerpluginUrl = url + '/../../../';
 
-        _cache : {
-            menu: {}
-        },
-
-        init : function(ed, url)
-        {
-            var t = this;
-
-            t.pluginRoot = url + '/../../../';
-
-            ed.addCommand(
-                'bolpartnerplugin',
-                function(ui, val)
+        editor.addCommand('BolCom.product-link', function(ui, v) {
+            var script = editor.bolpartnerpluginUrl + 'src/ajax/popup/product-link.php';
+            editor.windowManager.open(
                 {
-                    var script = t.pluginRoot + 'src/ajax/popup/' + val + '.php';
-                    ed.windowManager.open(
-                        {
-                            file        : script,
-                            width       : t._pluginWidth[val],
-                            height      : t._pluginHeight[val],
-                            inline      : 1,
-                            auto_focus  : 0
-                        },
-                        {
-                            plugin_url  : url
-                        }
-                    );
+                    file        : script,
+                    width       : 960,
+                    height      : 800,
+                    inline      : 1,
+                    auto_focus  : 0
                 }
             );
-
-            ed.addButton(
-                'bolpartnerplugin',
+        });
+        editor.addCommand('BolCom.bestsellers', function(ui, v) {
+            var script = editor.bolpartnerpluginUrl + 'src/ajax/popup/bestsellers.php';
+            editor.windowManager.open(
                 {
-                    title   : 'BolCom.button-description',
-                    cmd     : 'bolpartnerplugin',
-                    image   : t.pluginRoot + 'resources/images/bol.gif'
+                    file        : script,
+                    width       : 960,
+                    height      : 800,
+                    inline      : 1,
+                    auto_focus  : 0
                 }
             );
-
-            ed.onInit.add(
-                function()
+        });
+        editor.addCommand('BolCom.search-form', function(ui, v) {
+            var script = editor.bolpartnerpluginUrl + 'src/ajax/popup/search-form.php';
+            editor.windowManager.open(
                 {
-                    if (ed.settings.content_css !== false) {
-                        var cssUrl = t.pluginRoot + 'resources/css/tinymce/button.css';
-                        dom = ed.windowManager.createInstance('tinymce.dom.DOMUtils', document);
-                        dom.loadCSS(cssUrl);
-                        ed.dom.loadCSS(cssUrl);
+                    file        : script,
+                    width       : 960,
+                    height      : 840,
+                    inline      : 1,
+                    auto_focus  : 0
+                }
+            );
+        });
+
+        editor.addButton('bolpartnerplugin', {
+            title: 'Bol.com Products/Widgets toevoegen',
+            image: editor.bolpartnerpluginUrl + 'resources/images/bol.gif',
+            type: 'menubutton',
+            menu: [
+                {
+                    text: 'Productlink',
+                    onclick: function () {
+                        editor.execCommand('BolCom.product-link');
+                    }
+                },
+                {
+                    text: 'Bestsellerslijst',
+                    onclick: function () {
+                        editor.execCommand('BolCom.bestsellers');
+                    }
+                },
+                {
+                    text: 'Zoekwidget',
+                    onclick: function () {
+                        editor.execCommand('BolCom.search-form');
                     }
                 }
-            );
-        },
-
-        getInfo : function()
-        {
-            return {
-                longname    : 'Bol.com Product Links',
-                author      : 'Netvlies Internet',
-                authorurl   : 'http://www.netvlies.nl',
-                infourl     : 'http://www.netvlies.nl'
-            };
-        },
-
-        createControl : function(n, cm)
-        {
-            var t = this,
-                menu = t._cache.menu,
-                c,ed = tinyMCE.activeEditor,
-                each = tinymce.each;
-
-            if (n != 'bolpartnerplugin') {
-                return null;
-            }
-
-            c = cm.createSplitButton(
-                n,
-                {
-                    cmd     : '',
-                    scope   : t,
-                    title   : 'BolCom.button-description',
-                    image   : t.pluginRoot + 'resources/images/bol.gif'
-                }
-            );
-
-            c.onRenderMenu.add(
-                function(c, m)
-                {
-                    m.add({'class' : 'mceMenuItemTitle', title : 'BolCom.functions'}).setDisabled(1);
-                    each(t._pluginFunctions, function(value, key) {
-                        var o = {icon : 0},
-                            mi;
-
-                        o.onclick = function() {
-                            ed.execCommand('bolpartnerplugin', true, key);
-                        };
-
-                        o.title = value;
-                        mi = m.add(o);
-                        menu[key] = mi;
-                    });
-
-                    t._selectMenu(ed);
-                });
-
-                return c;
-        },
-
-        _selectMenu:function(ed)
-        {
-            var fe = ed.selection.getNode(),
-                each = tinymce.each,
-                menu = this._cache.menu;
-
-            each(this.shortcodes, function(value,key) {
-                if (typeof menu[key] == 'undefined' || !menu[key]) {
-                    return;
-                }
-                menu[key].setSelected(ed.dom.hasClass(fe, key));
-            });
-        }
+            ]
+        });
     });
-
-    tinymce.PluginManager.add('bolpartnerplugin', tinymce.plugins.bolpartnerplugin);
 })();
