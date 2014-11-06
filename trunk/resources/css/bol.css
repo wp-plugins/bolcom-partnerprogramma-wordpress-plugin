@@ -1,0 +1,320 @@
+h1,h2,h3,h4,h5 {
+    font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",sans-serif
+}
+.wrap {
+    padding: 0 10px;
+}
+#bolAdminPopup {
+    font-size: 12px;
+    font-family: sans-serif;
+    background: none;
+}
+#bolAdminPopup .hide {
+    display: none;
+}
+#widthSlider, #colsSlider {
+    width: 347px;
+    border: 1px solid #c6c6c6;
+}
+#bolAdminPopup span.infix {
+    line-height: 2.5em;
+}
+#tab-search {
+    padding-bottom: 0;
+}
+#tab-search table td {
+    vertical-align: top;
+}
+#tab-widget {
+    padding-top: 10px;
+    padding-bottom: 0;
+}
+#tab-widget #bol_previewParent {
+    height: 625px;
+    margin: 40px 0 0;
+    width: 440px;
+
+}
+#bolAdminPopup .mceActionPanel {
+    position: absolute;
+    bottom: 0px;
+    left: 10px;
+}
+#bolAdminPopup .actionPanel {
+    padding: 10px;
+}
+#tab-search .bol_pml_box {
+    padding-top: 5px;
+    padding-bottom: 0;
+}
+/*#bolAdminPopup a img {
+    border: none;
+}*/
+#bol_previewParent {
+    clear: both;
+    padding-top: 10px;
+    height: 625px;
+    margin: 40px 0 0;
+    width: 440px;
+    overflow: auto;
+}
+.bol-popup-dialog {
+}
+.bol-popup-dialog iframe {
+    width: 800px;
+    height: 750px;
+}
+.ui-widget-header{
+    background: none;
+    border: none;
+    border-bottom: 1px solid #CCC;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+.hideElement{
+    display: none;
+}
+.loader {
+    background: url(../images/loader.gif) 0% 25% no-repeat;
+    padding-left: 20px;
+}
+.label {
+    display: inline-block;
+    padding-bottom: 3px;
+    width: 135px;
+}
+.label .subLabel {
+    color: #5A5A5A;
+}
+ul.productlist {
+    margin: 0;
+    padding: 0;
+}
+
+.bolLinks .clearer {
+    clear:both;
+    height:1px;
+}
+.bolLinks .spacer {
+    height:10px;
+}
+
+.bolWidgetLogo {
+
+}
+
+.BolPartner_SelectedProducts_PlaceHolder .searchBox {
+    white-space: nowrap;
+}
+.BolPartner_SelectedProducts_PlaceHolder .searchBox input {
+    padding: 0 3px;
+    font-size: 1em;
+}
+.BolPartner_SelectedProducts_PlaceHolder .searchBox button {
+    font-size: 1em;
+}
+
+/** Styling according to Partner programm */
+.bol_pml_box {
+    overflow: hidden;
+    background: white;
+    border: 1px solid #D2D2D2;
+    padding: 12px 10px 10px 10px;
+    width: 250px;
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 11px;
+    color: #000000;
+    margin-bottom: 5px;
+}
+.bol_pml_box h4 {
+    font-size: 16px;
+    font-weight: bold;
+}
+.bol_pml_box div {
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 11px;
+}
+.bol_pml_box .bol_pml_box_inner {
+    float: left;
+    margin-top: 5px;
+}
+.bol_pml_box .bol_pml_box_inner .spacer {
+    height: 10px;
+}
+.bol_pml_box .bol_pml_box_inner .clearer {
+    clear: both;
+}
+
+.bol_pml_box .bol_pml_box_inner .bol_pml_element {
+    float: left;
+    width: 230px;
+}
+.bol_pml_element {
+    min-height: 106px;
+}
+.bol_pml_element .title {
+    font-size: 100%;
+}
+.bol_pml_element img {
+    display: block;
+}
+.bol_pml_element .imgwrap_mini {
+    float: left;
+}
+.bol_pml_element .imgwrap_mini img {
+    position: relative;
+    width: 65px;
+}
+.bol_pml_element a {
+    color: #0000ff;
+}
+.bol_pml_element .product_details_mini {
+    width: 155px;
+    float: left;
+    margin: 0 0 0 10px;
+}
+.bol_pml_element span {
+    display: block;
+    text-align: left;
+    line-height: 1.2em;
+}
+.bol_pml_element .product_details_mini .bol_pml_price {
+    font-weight: bold;
+}
+.bol_pml_element .product_details_mini img {
+}
+.bol_pml_element .subTitle {
+    padding-top: 4px;
+    font-size: 0.8em;
+    padding-bottom: 0;
+    line-height: 2em;
+}
+.bol_pml_element .bol_pml_price {
+    padding-bottom: 0;
+    line-height: 2em;
+}
+.bol_pml_element .bol_pml_price_type {
+    display: inline;
+}
+.bol_pml_element .rating im {
+    display: block;
+    line-height: 1.6em;
+}
+.bol_pml_element .bol_available {
+    padding: 4px 0 0;
+    font-size: 0.8em;
+    line-height: 1.2em;
+}
+/*
+.bol_pml_element .title {
+    display: inline-block;
+}
+.bol_pml_element .price {
+    display: block;
+    font-weight:bold;
+    color:#CB0100;
+}
+.bol_pml_element .rating {
+}
+.bol_pml_element a {
+    color:#0000FF;
+    text-decoration: none;
+}
+.bol_pml_element .imgwrap_mini {
+    float:left;
+}
+.bol_pml_element .imgwrap_mini img {
+    width:65px;
+    max-height: 92px;
+}
+.bol_pml_element .productDetailsMini {
+    position: relative;
+    width:175px;
+    float:left;
+    margin:0 0 0 5px;
+}
+.bol_pml_element .productDetailsMini .title,
+.bol_pml_element .productDetailsMini .subTitle,
+.bol_pml_element .productDetailsMini .price,
+.bol_pml_element .productDetailsMini .rating {
+    display: block;
+}
+.bol_pml_element .productDetailsMini .rating {
+    margin-bottom: 5px;
+}
+.bol_pml_element .productDetailsMini img.productImage {
+    float:left;
+}
+*/
+.bol_pml_box_inner .pager {
+    text-align: center;
+}
+.bol_pml_box_inner .pagerLink, .bol_pml_box_inner .currentPagerLink {
+    padding: 3px;
+}
+.bol_pml_box_inner .currentPagerLink {
+    font-weight: bold;
+}
+
+/** For backend display in product links display */
+#dvResults .bol_pml_box {
+    background: none;
+    border: none;
+}
+#dvSelectedProducts .bol_pml_box {
+    background: none;
+    border: none;
+}
+#dvSelectedProducts .bol_pml_box_inner {
+    border: none;
+}
+#dvResults .bol_pml_element, #dvSelectedProducts .bol_pml_element {
+    position: relative;
+    border: 1px solid #D2D2D2;
+    background: #ffffff;
+    width: 250px;
+    min-height: 94px;
+}
+#dvResults .bol_pml_element .imgwrap_mini img, #dvSelectedProducts .bol_pml_element .imgwrap_mini img {
+    width: 45px;
+}
+.bol_pml_element .toggle-product-icon {
+    display: block;
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 24px;
+    height: 24px;
+    background: url(../images/icon_add.gif) top left no-repeat;
+}
+#dvSelectedProducts .bol_pml_element .toggle-product-icon {
+    background: url(../images/icon_delete_button.gif) top left no-repeat;
+}
+
+input.color {
+    background-clip: padding-box;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+}
+.promotions.postbox h3.hndle {
+    padding: 0;
+    margin: 0 !important;
+}
+.promotions .inside {
+    margin: 0 !important;
+}
+.promotions.postbox h3 span {
+    font-family: Georgia,"Times New Roman","Bitstream Charter",Times,serif;
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 1;
+    margin: 0;
+    padding: 7px 10px;
+    display: block;
+    cursor: pointer;
+    color: #21759B;
+}
+
+i.mce-i-bolpartnerplugin {
+    background-image: url('../images/bol.gif');
+}
