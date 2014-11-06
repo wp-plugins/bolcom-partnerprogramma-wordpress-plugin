@@ -12,7 +12,7 @@
                 {
                     file        : script,
                     width       : 960,
-                    height      : 800,
+                    height      : 500,
                     inline      : 1,
                     auto_focus  : 0
                 }
@@ -24,7 +24,7 @@
                 {
                     file        : script,
                     width       : 960,
-                    height      : 800,
+                    height      : 500,
                     inline      : 1,
                     auto_focus  : 0
                 }
@@ -36,7 +36,7 @@
                 {
                     file        : script,
                     width       : 960,
-                    height      : 840,
+                    height      : 500,
                     inline      : 1,
                     auto_focus  : 0
                 }

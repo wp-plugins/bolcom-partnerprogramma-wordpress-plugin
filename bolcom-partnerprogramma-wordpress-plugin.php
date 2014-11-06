@@ -18,7 +18,7 @@ include_once 'src/BolPartnerPlugin/PluginInstaller.php';
 
 if (! defined('BOL_PARTNER_BASEDIR')) {
     define('BOL_PARTNER_BASEDIR', __DIR__);
-    define('BOL_PARTNER_PLUGIN_PATH', WP_CONTENT_URL . '/plugins/' . plugin_basename(dirname(__FILE__)));
+    define('BOL_PARTNER_PLUGIN_PATH', plugin_dir_url(dirname(__FILE__)) . plugin_basename(dirname(__FILE__)));
     $include = array(ini_get('include_path'));
     $include[] = BOL_PARTNER_BASEDIR . '/src';
     $include[] = BOL_PARTNER_BASEDIR . '/vendor';

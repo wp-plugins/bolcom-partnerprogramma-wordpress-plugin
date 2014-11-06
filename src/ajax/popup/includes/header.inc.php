@@ -13,7 +13,7 @@
 <head>
     <title>Bol.com <?php echo $subTitle ?></title>
     <?php if (!isset($_REQUEST['widget'])):?>
-    <script type="text/javascript" src="<?php echo get_settings('home') ?>/wp-includes/js/tinymce/tiny_mce_popup.js"></script>
+    <script type="text/javascript" src="<?php echo includes_url() ?>js/tinymce/tiny_mce_popup.js"></script>
     <?php endif ?>
     <script type="text/javascript">var bol_partner_plugin_base = '<?php echo BOL_PARTNER_PLUGIN_PATH ?>';</script>
     <script type="text/javascript" src="<?php echo BOL_PARTNER_PLUGIN_PATH ?>/resources/js/jquery-1.4.2.min.js"></script>
@@ -39,7 +39,7 @@
     <script type="text/javascript" src="<?php echo BOL_PARTNER_PLUGIN_PATH ?>/resources/js/bol-admin-<?php echo $popupPage ?>.js"></script>
     <?php endif ?>
     <!--<link rel="stylesheet" type="text/css" href="/wp-admin/load-styles.php?c=1&dir=ltr&load=admin-bar,wp-admin,buttons">-->
-    <link rel="stylesheet" type="text/css" href="<?php echo get_settings('home') ?>/wp-admin/load-styles.php?c=1&dir=ltr&load=admin-bar,buttons,media-views,wp-admin,wp-auth-check">
+    <link rel="stylesheet" type="text/css" href="<?php echo admin_url() ?>load-styles.php?c=1&dir=ltr&load=admin-bar,buttons,media-views,wp-admin,wp-auth-check">
     <link rel="stylesheet" type="text/css" href="<?php echo BOL_PARTNER_PLUGIN_PATH ?>/resources/css/colors-fresh.css">
     <link rel="stylesheet" type="text/css" href="<?php echo BOL_PARTNER_PLUGIN_PATH ?>/resources/css/jquery-ui-1.8.13.custom.css">
     <link rel="stylesheet" type="text/css" href="<?php echo BOL_PARTNER_PLUGIN_PATH ?>/resources/css/bol.css">
