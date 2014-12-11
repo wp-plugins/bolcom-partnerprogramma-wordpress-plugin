@@ -3,7 +3,7 @@ Contributors: Netvlies Internetdiensten
 Tags: bol.com, affiliate, partner program, Netherlands stores
 Requires at least: 3.9.0
 Tested up to: 3.9.0
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 Licence: MIT
 Bol.com Affiliate Partner program to sell goods on your own website.
 
@@ -145,6 +145,10 @@ We (Netvlies Internetdiensten and bol.com partner program) are always interested
 7. General plugin settings preview.
 
 == Changelog ==
+
+= 1.3.4 =
+Fixed a bug where product links didn't show when adding more than one product link on a page.
+Added a warning for AdBlock users.
 
 = 1.3.3 =
 * Removed shortcodes in sourcecode. Shortcodes do not have to be enabled anymore from now on.
