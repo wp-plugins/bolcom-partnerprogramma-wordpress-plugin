@@ -3,7 +3,7 @@ Contributors: Netvlies Internetdiensten
 Tags: bol.com, affiliate, partner program, Netherlands stores
 Requires at least: 3.9.0
 Tested up to: 3.9.0
-Stable tag: 1.3.1
+Stable tag: 1.3.4
 Licence: MIT
 Bol.com Affiliate Partner program to sell goods on your own website.
 
@@ -41,6 +41,12 @@ A more detailed installation guide can be found at: [https://www.bol.com/nl/cms/
 == Frequently Asked Questions ==
 
 No solution to your problem in this section? Go to the [support forum](http://wordpress.org/support/plugin/bolcom-partnerprogramma-wordpress-plugin/)
+
+= AdBlock =
+
+Since the Bol Partner Program plugin is considered an advertising plugin, AdBlock is known to block the Bol plugin.
+Please turn off AdBlock while using the Bol plugin.
+
 
 = Fatal error: Call to undefined function BolPartnerPlugin\Widgets\Renderer\mb_strlen() =
 
@@ -140,7 +146,14 @@ We (Netvlies Internetdiensten and bol.com partner program) are always interested
 
 == Changelog ==
 
-= 1.3.1 =
+= 1.3.4 =
+Fixed a bug where product links didn't show when adding more than one product link on a page.
+Added a warning for AdBlock users.
+
+= 1.3.3 =
+* Removed shortcodes in sourcecode. Shortcodes do not have to be enabled anymore from now on.
+
+= 1.3.2 =
 * Fixed 'mixed content warnings' and changed the size of the widget for smaller resolutions.
 
 = 1.3.0 =
