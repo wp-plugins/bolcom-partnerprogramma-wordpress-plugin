@@ -73,7 +73,7 @@ $bolSearch = BOL_PARTNER_PLUGIN_PATH . '/src/ajax/bol-search.php';
                 </table>
 
                 <div class="actionPanel">
-                <input type="hidden" name="blockId" id="blockId" value="bol_<?= uniqid() ?>_selected-products" />
+                <input type="hidden" name="blockId" id="blockId" value="bol_<?php uniqid(); ?>_selected-products" />
                 <?php if ($_REQUEST['widget']):?>
                     <input type="hidden" name="widget" id="widget" value="<?php echo strip_tags($_REQUEST['widget'])?>" />
                     <input type="button" name="save" class="button button-primary" value="<?php  _e('Save', 'bolcom-partnerprogramma-wordpress-plugin'); ?>" onclick="BolProductDialog.insert(<?php echo !empty($_REQUEST['widget'])?>)" />

@@ -142,6 +142,9 @@ class Plugin
 
     public function jsAddResourceRoot()
     {
+        echo '<script type="text/javascript">var adblock = true;</script>';
+        echo '<script type="text/javascript" src="'.BOL_PARTNER_PLUGIN_PATH.'/resources/js/adblock.js"></script>';
+        echo '<script type="text/javascript">if(adblock)alert("Adblock is turned on. Please turn it off for the Bol plugin to work.");</script>';
         echo '<script type="text/javascript">var bol_partner_plugin_base = "' . BOL_PARTNER_PLUGIN_PATH . '";</script>';
     }
 
