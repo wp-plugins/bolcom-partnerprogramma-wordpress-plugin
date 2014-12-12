@@ -3,7 +3,7 @@ Contributors: Netvlies Internetdiensten
 Tags: bol.com, affiliate, partner program, Netherlands stores
 Requires at least: 3.9.0
 Tested up to: 3.9.0
-Stable tag: 1.3.5
+Stable tag: 1.3.6
 Licence: MIT
 Bol.com Affiliate Partner program to sell goods on your own website.
 
@@ -146,7 +146,7 @@ We (Netvlies Internetdiensten and bol.com partner program) are always interested
 
 == Changelog ==
 
-= 1.3.5 =
+= 1.3.6 =
 Rollback to prevent the AdBlock warnings.
 
 = 1.3.4 =
