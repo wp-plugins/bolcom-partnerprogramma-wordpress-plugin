@@ -2,8 +2,8 @@
 Contributors: Netvlies Internetdiensten
 Tags: bol.com, affiliate, partner program, Netherlands stores
 Requires at least: 3.9.0
-Tested up to: 3.9.0
-Stable tag: 1.3.6
+Tested up to: 4.1.0
+Stable tag: 1.3.7
 Licence: MIT
 Bol.com Affiliate Partner program to sell goods on your own website.
 
@@ -20,7 +20,7 @@ and has a growing presence in Belgium. It offers non-food products in a wide ran
 
 == Minimal requirements ==
 
-* Wordpress 3.1.1 or higher
+* Wordpress 3.9.0 or higher
 * PHP version 5.3+ with the cURL extension installed and enabled and the PHP server setting 'short_open_tag' set to value On,
 mbstring and parse_ini_file() functions enabled
 * No interfering with other plugins (f.e. [Page Builder Plugin](http://siteorigin.com/page-builder))
@@ -146,12 +146,14 @@ We (Netvlies Internetdiensten and bol.com partner program) are always interested
 
 == Changelog ==
 
+= 1.3.7 =
+* Fixed a bug where product links didn't show when adding more than one product link on a page.
+
 = 1.3.6 =
-Rollback to prevent the AdBlock warnings.
+* Rollback to prevent the AdBlock warnings.
 
 = 1.3.4 =
-Fixed a bug where product links didn't show when adding more than one product link on a page.
-Added a warning for AdBlock users.
+* Added a warning for AdBlock users.
 
 = 1.3.3 =
 * Removed shortcodes in sourcecode. Shortcodes do not have to be enabled anymore from now on.

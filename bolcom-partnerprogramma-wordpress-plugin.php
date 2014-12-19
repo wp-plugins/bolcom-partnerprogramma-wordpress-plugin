@@ -4,7 +4,7 @@ Plugin Name: Bol.com partner plugin for Wordpress
 Plugin URI: http://wordpress.org/plugins/bolcom-partnerprogramma-wordpress-plugin/
 Description: This plugin is for bol.com affiliate partners. It enables the placement of Bol.com products from the Bol.com openAPI. Content can be added through the text editor and by widgets.
 Author: Netvlies Internetdiensten
-Version: 1.3.6
+Version: 1.3.7
 Author URI: http://www.netvlies.nl
 License: MIT
 */
