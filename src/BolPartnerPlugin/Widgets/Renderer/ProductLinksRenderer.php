@@ -56,7 +56,7 @@ class ProductLinksRenderer
         $html = $this->getHtmlBody();
 
         $this->options['cols'] = isset($this->options['cols']) ? $this->options['cols'] : 1;
-        $this->options['element_width'] = (int) floor($this->options['width'] / $this->options['cols']);
+        $this->options['element_width'] = (int) floor($this->options['width'] / $this->options['cols']) - 22;
         $this->options['image_width'] = $this->options['image_size'] ? 65 : 45;
 
         $renderer = new ProductRenderer();
@@ -151,6 +151,7 @@ class ProductLinksRenderer
             'background_color'  => 'background-color: #%s;',
             'text_color'        => 'color: #%s;',
             'border_color'      => 'border: 1px solid #%s',
+            'box-sizing'        => 'border-box',
         );
 
         return $this->getCss($cssOptions);
